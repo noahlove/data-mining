@@ -1,9 +1,5 @@
----
-title: "pca"
-author: "Wayne Lee"
-date: "2/17/2021"
-output: html_document
----
+
+# Principal Component Analysis
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

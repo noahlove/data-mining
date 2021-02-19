@@ -1,3 +1,7 @@
-down-the-rabbit-hole
+a-brief-introduction
 the-pool-of-tears
 a-caucus-race-and-a-long-tale
+principal-component-analysis
+principle-component-analysis
+typical-machine-learning-approach
+what-we-would-do-in-data-mining
