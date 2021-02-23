@@ -24,7 +24,7 @@
 <meta name="author" content="Noah Love" />
 
 
-<meta name="date" content="2021-02-19" />
+<meta name="date" content="2021-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="a-caucus-race-and-a-long-tale.html"/>
-
+<link rel="next" href="principal-component-analysis-applied.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,6 +142,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#typical-machine-learning-approach"><i class="fa fa-check"></i><b>4.2</b> Typical machine learning approach</a></li>
 <li class="chapter" data-level="4.3" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-we-would-do-in-data-mining"><i class="fa fa-check"></i><b>4.3</b> What we would do in data mining</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html"><i class="fa fa-check"></i><b>5</b> Principal Component Analysis Applied!</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html#citation-data"><i class="fa fa-check"></i><b>5.1</b> Citation data</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html#other-example"><i class="fa fa-check"></i><b>5.1.1</b> Other example</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -241,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-3"><a href="principal-component-analysis.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="principal-component-analysis.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#error: differrence between measured values against predict. Mean of this squared MSE!</span></span>
 <span id="cb6-5"><a href="principal-component-analysis.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((df<span class="sc">$</span>y[<span class="sc">-</span>train] <span class="sc">-</span> ols_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 117.7051</code></pre>
+<pre><code>## [1] 108.9647</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="principal-component-analysis.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#run ols </span></span>
 <span id="cb8-2"><a href="principal-component-analysis.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="principal-component-analysis.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#PCA TIME</span></span>
@@ -253,8 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;prcomp&quot;</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="principal-component-analysis.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#it has its own class</span></span>
 <span id="cb10-2"><a href="principal-component-analysis.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pr_out)</span></code></pre></div>
-<pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;  
-## [4] &quot;scale&quot;    &quot;x&quot;</code></pre>
+<pre><code>## [1] &quot;sdev&quot;     &quot;rotation&quot; &quot;center&quot;   &quot;scale&quot;    &quot;x&quot;</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="principal-component-analysis.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#squared value of sdev is eigenvalue</span></span>
 <span id="cb12-2"><a href="principal-component-analysis.html#cb12-2" aria-hidden="true" tabindex="-1"></a>eigen_val <span class="ot">&lt;-</span> pr_out<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> </span>
 <span id="cb12-3"><a href="principal-component-analysis.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -294,47 +300,408 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="principal-component-analysis.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#these will be the same, but we choose a cutoff. </span></span>
 <span id="cb18-2"><a href="principal-component-analysis.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="principal-component-analysis.html#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="principal-component-analysis.html#cb18-4" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> pr_out<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span>cutoff]</span>
-<span id="cb18-5"><a href="principal-component-analysis.html#cb18-5" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, W)</span>
-<span id="cb18-6"><a href="principal-component-analysis.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="principal-component-analysis.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#should be like the ols from above</span></span>
-<span id="cb18-8"><a href="principal-component-analysis.html#cb18-8" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., df_w, <span class="at">subset=</span>train)</span>
-<span id="cb18-9"><a href="principal-component-analysis.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#same prediction</span></span>
-<span id="cb18-10"><a href="principal-component-analysis.html#cb18-10" aria-hidden="true" tabindex="-1"></a>pca_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, df_w[<span class="sc">-</span>train,])</span>
-<span id="cb18-11"><a href="principal-component-analysis.html#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="principal-component-analysis.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#prediction error</span></span>
-<span id="cb18-13"><a href="principal-component-analysis.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((df_w<span class="sc">$</span>y[<span class="sc">-</span>train] <span class="sc">-</span> pca_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 122.8738</code></pre>
+<span id="cb18-4"><a href="principal-component-analysis.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="principal-component-analysis.html#cb18-5" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> pr_out<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span>cutoff]</span>
+<span id="cb18-6"><a href="principal-component-analysis.html#cb18-6" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, W)</span>
+<span id="cb18-7"><a href="principal-component-analysis.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="principal-component-analysis.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="principal-component-analysis.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#PCA doesn&#39;t have to be lm. It could be ridge or lasso too</span></span>
+<span id="cb18-10"><a href="principal-component-analysis.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#should be like the ols from above</span></span>
+<span id="cb18-11"><a href="principal-component-analysis.html#cb18-11" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., df_w, <span class="at">subset=</span>train)</span>
+<span id="cb18-12"><a href="principal-component-analysis.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#same prediction</span></span>
+<span id="cb18-13"><a href="principal-component-analysis.html#cb18-13" aria-hidden="true" tabindex="-1"></a>pca_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pca, df_w[<span class="sc">-</span>train,])</span>
+<span id="cb18-14"><a href="principal-component-analysis.html#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="principal-component-analysis.html#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#prediction error</span></span>
+<span id="cb18-16"><a href="principal-component-analysis.html#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((df_w<span class="sc">$</span>y[<span class="sc">-</span>train] <span class="sc">-</span> pca_pred)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 111.6873</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="principal-component-analysis.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#that was the classic view of PCA </span></span></code></pre></div>
 </div>
 <div id="what-we-would-do-in-data-mining" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> What we would do in data mining</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="principal-component-analysis.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now looking at rotation</span></span>
-<span id="cb21-2"><a href="principal-component-analysis.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="principal-component-analysis.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#k is which column are we going to examine</span></span>
-<span id="cb21-4"><a href="principal-component-analysis.html#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="principal-component-analysis.html#cb21-5" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb21-6"><a href="principal-component-analysis.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr_out<span class="sc">$</span>rotation[, j])</span>
-<span id="cb21-7"><a href="principal-component-analysis.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="principal-component-analysis.html#cb21-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb21-2"><a href="principal-component-analysis.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr_out<span class="sc">$</span>rotation[,k])</span>
+<span id="cb21-3"><a href="principal-component-analysis.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="principal-component-analysis.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">abs</span>(pr_out<span class="sc">$</span>rotation[, j]) <span class="sc">&gt;</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<pre><code>##  [1]  1  2  4  6 13 15 17 19 26 27 28 30</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="principal-component-analysis.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what is the truth we should be comparing to?</span></span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="principal-component-analysis.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">abs</span>(pr_out<span class="sc">$</span>rotation[, k]) <span class="sc">&gt;</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>##  [1]  3  7  8  9 14 15 21 22 24 25 28 30</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="principal-component-analysis.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#what is the truth we should be comparing to?</span></span>
 <span id="cb24-2"><a href="principal-component-analysis.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="principal-component-analysis.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="principal-component-analysis.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#What is rotation. Matrix (30 x 30 in this case)</span></span>
-<span id="cb24-5"><a href="principal-component-analysis.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pr_out<span class="sc">$</span>rotation)</span></code></pre></div>
-<pre><code>## [1] 30 30</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="principal-component-analysis.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#it is actually p x p rather than p x k to give you more columns</span></span>
+<span id="cb24-3"><a href="principal-component-analysis.html#cb24-3" aria-hidden="true" tabindex="-1"></a>pr_out <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(observ_x)</span>
+<span id="cb24-4"><a href="principal-component-analysis.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="principal-component-analysis.html#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="principal-component-analysis.html#cb24-6" aria-hidden="true" tabindex="-1"></a>test_x <span class="ot">&lt;-</span> <span class="fu">scale</span>(observ_x, <span class="at">scale =</span> <span class="cn">FALSE</span>) <span class="sc">%*%</span></span>
+<span id="cb24-7"><a href="principal-component-analysis.html#cb24-7" aria-hidden="true" tabindex="-1"></a>pr_out<span class="sc">$</span>rotation</span>
+<span id="cb24-8"><a href="principal-component-analysis.html#cb24-8" aria-hidden="true" tabindex="-1"></a>pr_out<span class="sc">$</span>x</span></code></pre></div>
+<pre><code>##                  PC1          PC2           PC3
+##    [1,]  0.833391540  0.301271529  0.2632664689
+##    [2,] -0.944470799 -1.476182743  0.7975674093
+##    [3,] -1.479023799 -2.013349238 -1.6006794607
+##    [4,] -0.266478002  0.143474651 -0.2367797097
+##    [5,] -1.190428134  3.177101835  0.0878852136
+##    [6,] -1.084490105  1.501776666 -0.1203200669
+##    [7,] -3.430731260  1.302585147  0.1464447284
+##    [8,]  0.741358714  1.481917252  2.5634978487
+##    [9,] -1.260894533 -0.581409723  1.9077973637
+##   [10,] -0.962393694 -1.290011535  2.5285512183
+##   [11,] -0.786420844 -0.913717615  2.1718580502
+##   [12,]  1.243162729  0.343437931 -1.2599795845
+##   [13,]  0.324892131 -0.406183179  1.3647427499
+##   [14,] -0.982340223  1.001048731  0.9676127509
+##   [15,] -1.467831879 -0.671583857  1.6775654398
+##   [16,] -1.635235817 -1.555649434 -0.6336963824
+##   [17,] -0.450242332 -0.956107247  0.3555563161
+##   [18,]  1.644048043 -1.946108700 -2.0558013877
+##   [19,]  1.827628560  1.026821950  2.2210460778
+##   [20,]  1.286271842 -2.045958269 -1.3589723828
+##   [21,] -0.190177412  0.029801590  0.2586088056
+##   [22,] -0.857189767 -0.400465871  0.0183314033
+##   [23,] -0.658752925  1.860427888 -0.0422839674
+##   [24,] -1.889913098 -0.353650354 -0.7072352516
+##   [25,]  2.104338615 -0.767229917 -1.8859628506
+##   [26,] -0.005334260 -0.182108550  0.6233235920
+##   [27,] -1.436519057  1.001155271 -0.8752130716
+##   [28,] -3.893810158 -1.332967565  0.9005595034
+##   [29,] -1.131465938  1.741930992 -2.3337650943
+##   [30,]  1.287181897 -1.757531670 -1.6382473671
+##   [31,]  0.422403135  3.431112942 -4.2616680428
+##   [32,] -0.042394486  0.708908920 -1.6253286851
+##   [33,] -0.099976063 -2.969119563  1.1970919131
+##                   PC4          PC5           PC6
+##    [1,] -4.9449641894 -0.164490514  0.9016826280
+##    [2,] -1.0858993921 -0.132812640 -0.4051700300
+##    [3,] -0.8062222462 -0.740065420  0.3837741180
+##    [4,]  1.1662727347  0.447637318  0.0323576289
+##    [5,] -2.3518450166 -0.793101242 -0.8632356281
+##    [6,] -0.1163975487 -1.771415104 -1.7213857467
+##    [7,]  0.2338013564  0.050907839 -0.2041688390
+##    [8,] -0.2862774461 -0.097443318  0.2034499145
+##    [9,]  2.1933848527 -1.822602568  0.4189718702
+##   [10,] -1.2859836412 -1.288177803  1.2182215894
+##   [11,] -0.5020825076 -2.821303416  1.0477282150
+##   [12,] -0.4859076698 -0.754111915  0.1585728433
+##   [13,] -0.3614550613  1.308421908  0.6903851101
+##   [14,]  0.2476851741  1.399865958 -0.1534692311
+##   [15,]  2.0012333194 -0.376488560  0.6432224926
+##   [16,]  0.4996742634  0.557061275  0.1864708005
+##   [17,] -1.7118770036 -1.977276492 -0.2565467749
+##   [18,] -2.1019314588  2.428622946 -0.1335804291
+##   [19,]  2.7981303851 -1.220131636 -1.0001213190
+##   [20,]  0.9478042954 -1.532037227 -0.8201066828
+##   [21,]  0.9472163823 -2.088620627  1.2903245043
+##   [22,]  1.3286910821 -2.329488144  0.4392347707
+##   [23,]  0.7894541139 -0.087596366  1.1092156368
+##   [24,]  1.6607304976 -2.341980193  0.7860597968
+##   [25,] -1.0275340636  0.189278513  0.1437796891
+##   [26,] -2.8887850515 -0.760289708 -0.9221602260
+##   [27,]  0.5569835717 -0.527208144  0.6360312599
+##   [28,]  0.1266979919 -0.455649632  0.7089279205
+##   [29,]  0.7160340593  1.438748453  0.2102311561
+##   [30,]  0.8139530353  0.551028448 -0.2736462222
+##   [31,] -1.4393311717 -0.401981880 -0.1577620018
+##   [32,]  0.9717611561  0.091147809 -0.3145484586
+##   [33,] -1.2013859225  1.287414635  0.9899131681
+##                   PC7           PC8          PC9
+##    [1,]  0.9228566901 -0.7849112314 -0.526824168
+##    [2,] -0.0683689088 -1.0212161359 -0.133972411
+##    [3,] -0.4313410364  0.1236612712  0.311994580
+##    [4,]  0.7501869231 -0.6640041768 -0.765701638
+##    [5,] -0.5678130969 -0.2701017593 -0.067707848
+##    [6,]  0.4342577304 -0.3035482962  0.382316838
+##    [7,] -0.5549666161  1.2017035013 -0.079257334
+##    [8,]  0.1484911204  0.0790292354 -0.511711873
+##    [9,] -1.0076805901  0.9213969759 -0.040251000
+##   [10,]  0.3192129314 -0.2976137414 -0.322969555
+##   [11,] -0.4099483446  0.6236329072 -0.436865135
+##   [12,] -0.0225856539 -0.3602610027 -0.464334948
+##   [13,]  0.2323138797  0.1935019077  0.798092041
+##   [14,] -0.4033511748  0.0688268421 -0.156309970
+##   [15,] -0.4351260080  0.1726591175  0.363351257
+##   [16,]  0.1342588712  0.1964493097 -0.498054931
+##   [17,]  0.5915630638  0.7474970718 -0.893721029
+##   [18,]  0.2943916280 -0.7954858163  0.076871316
+##   [19,] -0.0466593231 -0.5535532088  0.630452076
+##   [20,] -0.4118724409  0.0658692019 -0.164958243
+##   [21,]  0.5689675381 -0.3008790865 -0.275515908
+##   [22,]  0.6585275315  0.2410216927 -0.208136926
+##   [23,]  1.4722144581 -0.0741598008 -0.035141950
+##   [24,] -1.1149739095  0.2769378907  0.404630016
+##   [25,]  0.6240314013  1.3007169324 -1.005597864
+##   [26,]  0.9507625053 -0.1467069091  0.196977899
+##   [27,]  0.0299438000  0.1464368872 -0.343298823
+##   [28,] -0.1968538520  0.3689363772  0.524120201
+##   [29,] -0.2581164692 -0.4748850046  1.170360459
+##   [30,] -1.3586275846 -0.2469952385 -0.097956653
+##   [31,]  0.5865810297  0.1808537037  0.394833424
+##   [32,] -0.1959745087  0.1482112993  0.534992956
+##   [33,]  0.2158359430  0.1018620680 -0.059620387
+##                  PC10          PC11          PC12
+##    [1,]  0.6528176404  0.0621880491 -0.2509221930
+##    [2,]  0.4196083953 -0.2938260095 -0.4471333934
+##    [3,] -0.5220370508 -0.1962283249 -1.0919922756
+##    [4,] -0.2091272268  0.5329054209 -0.1434655099
+##    [5,]  0.7198649454 -0.7062630761  0.4763412619
+##    [6,]  0.2177830828  0.1937716241  0.1839418980
+##    [7,] -0.1527357217 -0.1942742033 -0.8207286763
+##    [8,] -0.4457387778  0.0805088291  0.5196878545
+##    [9,]  0.8387258499 -0.8734765171 -0.0922310830
+##   [10,] -0.0158236180  0.0454423948 -0.7268039366
+##   [11,]  0.3953911879 -0.5733725862 -0.3334337830
+##   [12,] -0.2376582974 -0.3550864522  0.4006119829
+##   [13,]  0.4835275022 -0.1346941495 -0.2981925884
+##   [14,]  0.5676797485  0.0696174816 -0.7417896249
+##   [15,] -0.3488432232  0.2871737029 -0.6705616903
+##   [16,] -0.9842394475 -0.0291743637 -0.2973993232
+##   [17,]  0.2287687863  0.3813264845 -0.1530484429
+##   [18,] -0.0306607108 -0.7995817919 -0.7655055123
+##   [19,] -0.1527941224  0.2990711965 -0.3507406829
+##   [20,]  0.2709898969  1.2231987095 -0.0510225945
+##   [21,]  0.7217391215  0.1159173192 -0.2407498636
+##   [22,] -0.6889490202 -0.2073958280  0.5384034751
+##   [23,]  0.1676033926 -0.9383448918 -0.0040169319
+##   [24,] -0.0675892145 -0.9720453555 -0.3954688947
+##   [25,] -0.0285686518  0.1148866000 -0.3837056139
+##   [26,] -0.6315094132  0.3868066169 -0.2226802253
+##   [27,] -0.0220898278  0.2647034235 -0.6360129079
+##   [28,]  0.1443098046 -0.3588600137 -0.2742389526
+##   [29,] -0.2933526477  0.1371352046  0.3721366820
+##   [30,]  0.2221111027  0.6084980981  0.8293265659
+##   [31,]  0.4472725676 -0.1763169687  0.4628848386
+##   [32,] -0.0514450555  0.8760928307 -0.4801247983
+##   [33,]  0.8169041839  1.3622090869  0.1731320269
+##                  PC13          PC14         PC15
+##    [1,] -0.0139004494 -0.4077402859 -0.056920573
+##    [2,] -0.7009676562 -0.2336080973 -0.389850162
+##    [3,]  0.6322762323 -0.0008346196 -0.380321807
+##    [4,] -0.0958506714  0.5268728475  0.293451434
+##    [5,]  0.3733986161  0.3759499656 -0.688247672
+##    [6,]  0.0808482207  0.1771482632 -0.317991286
+##    [7,] -0.3346474121  0.9496287192 -0.713783941
+##    [8,] -0.0620027268 -0.0987837958 -0.163642911
+##    [9,]  0.0787432745 -0.8640320807  0.104295251
+##   [10,] -0.2229894467 -0.4821078495  0.597308818
+##   [11,]  1.1793904534 -0.3720998480  0.088132309
+##   [12,]  0.4221823499 -0.6030159312 -0.259693485
+##   [13,] -0.4912804440  0.3927297466  0.444971182
+##   [14,]  0.1242029113  0.7607380603 -0.334268118
+##   [15,]  0.3598597076  0.6647353276  0.160372319
+##   [16,] -0.6801943037 -0.7320357736 -0.282325233
+##   [17,]  0.2713840395 -0.5494062715 -0.333655562
+##   [18,]  0.1899896022  0.1443560948 -0.250768873
+##   [19,]  0.2800874038 -0.4412709343 -1.101955176
+##   [20,] -0.0542874534  0.2109016516  0.523033724
+##   [21,] -0.4589127980 -0.5879199006 -0.840752352
+##   [22,]  0.1306524067  0.1642594392  0.069907842
+##   [23,] -0.0815173251  0.5528184226 -0.431669660
+##   [24,] -0.5740105343 -0.4610742511 -0.218690413
+##   [25,] -0.9195876011 -0.1230367467 -0.207726780
+##   [26,] -0.0615804275 -0.9632141286  1.228217823
+##   [27,]  0.2184250341 -1.1745875362 -0.815330329
+##   [28,] -0.1036467495 -0.2163310284 -0.499037984
+##   [29,]  0.8203234574  0.0696552944 -0.501284067
+##   [30,] -0.4325108507 -0.4500585724 -0.281014017
+##   [31,] -0.1133932653  0.0011254499  0.031129688
+##   [32,]  0.4188443037  0.1560836277 -0.176806227
+##   [33,] -0.7057687324 -0.1591439709  0.087299212
+##                  PC16          PC17          PC18
+##    [1,]  0.6043258807  0.0115532441  0.0875123940
+##    [2,] -0.1026836164  0.2464334994  0.0017353197
+##    [3,] -0.1099931436  0.2622344637  0.6411596520
+##    [4,]  0.6134567629 -0.4691181197  0.1031574301
+##    [5,] -0.2314266764 -0.0850960033  0.4387133527
+##    [6,] -0.1111494119  0.0871284901  0.5628109573
+##    [7,]  0.2587319425 -0.1212680174 -0.1217374077
+##    [8,]  0.0045278475  0.8214099624  0.0021313673
+##    [9,]  0.5018899727 -0.6403133856 -0.3520343201
+##   [10,] -0.5944736680  0.2596495794  0.4879541422
+##   [11,] -0.3131408642 -0.0831143872 -0.4971568299
+##   [12,]  0.3742158074  0.1382919936 -0.0637411262
+##   [13,] -0.1024632991  0.2456806999  0.6369606870
+##   [14,]  0.5052919656 -0.8559230115 -0.4979825334
+##   [15,]  0.1770168482  0.0820269886 -0.0197959820
+##   [16,] -0.6437482378 -0.1122383550 -1.2594914743
+##   [17,]  0.6069239742  0.1029512299 -0.3349240881
+##   [18,] -0.4687775397  0.4075554073  0.5258184173
+##   [19,]  0.2859579711 -0.3530844043 -0.1419601695
+##   [20,] -0.5371204310  0.3453430195 -0.5489496887
+##   [21,]  0.3209417486 -0.9584137445 -0.4228550811
+##   [22,]  1.1708489293  0.2057706829 -0.1997026192
+##   [23,]  0.5230687401 -0.1087646568  0.2359349939
+##   [24,]  0.8571591563 -0.3984249428  0.1286329181
+##   [25,]  0.3711728985  0.3877844344  0.8159274324
+##   [26,] -0.1803591631 -0.0031158433  0.3344903876
+##   [27,] -0.2092785323  0.2170126583 -0.3268621552
+##   [28,] -0.0301288461  0.7458398647  0.4686596036
+##   [29,] -0.0208216468  0.3542185233  0.2622842590
+##   [30,] -0.0917013424  0.6139454197  0.0476324474
+##   [31,] -0.2978830181 -0.3337325278 -0.0945877352
+##   [32,] -0.4443630394  0.6942203690 -0.4772850977
+##   [33,] -0.1191735875 -0.9525401147 -0.5202532303
+##                  PC19          PC20          PC21
+##    [1,] -0.4646968422 -0.0977148803 -0.1885201912
+##    [2,]  0.7588830063  0.0185839382  0.1790497339
+##    [3,]  0.0785593446  0.1085951009 -0.3549789997
+##    [4,]  0.6779284663  0.1174888640 -0.2961228475
+##    [5,] -0.0490315512  0.4817148535  0.0442664313
+##    [6,] -0.4895700284  0.2086412044 -0.4279397259
+##    [7,] -0.4956156082 -0.1409644469  0.0602818462
+##    [8,]  0.1353157578 -0.1604465219 -0.0623506059
+##    [9,]  1.0123706173  0.2193689186 -0.6946775178
+##   [10,]  0.4603688508 -0.5889682293 -0.0496378150
+##   [11,]  0.4538005243  0.1060738598  0.2055519466
+##   [12,]  0.0398929417  0.2253711381 -0.0010646546
+##   [13,] -1.5125333762 -0.4798112249  0.3711309934
+##   [14,] -0.3801132144 -0.6265556867 -0.2085844739
+##   [15,] -0.1476343139  0.3975653746 -0.0759910211
+##   [16,]  0.0539908527 -0.6713144648 -0.4961844143
+##   [17,] -0.2838266161  0.1331464216  0.6240937501
+##   [18,] -0.0368942904 -0.3690793072  0.2732360599
+##   [19,] -0.2834222482 -0.0095968058 -0.2591458560
+##   [20,]  0.8471496387 -0.1383459914  0.1633274083
+##   [21,]  0.3530474236  0.0542126961 -0.1243305230
+##   [22,] -0.4865429578 -0.2294361140  1.4580465971
+##   [23,]  0.2746155017  0.8578980400 -0.0543529515
+##   [24,] -0.2053555794  0.2995866465 -0.0482414990
+##   [25,]  0.2329412095  0.9849488388  0.2475158720
+##   [26,] -0.7425339272  0.3825198390  0.1990967579
+##   [27,]  0.5506548995  0.4118467058  0.2059209219
+##   [28,] -0.3393430030  0.1101510808  0.5103520815
+##   [29,]  0.3375103357 -0.1085613673  0.4380653898
+##   [30,]  0.3920100863  0.2388679101  0.4325930870
+##   [31,]  0.0684199427 -0.1445078899 -0.4366816444
+##   [32,] -0.8553789501  0.0425517655 -0.2874126730
+##   [33,] -0.0690761985  0.6449913135  0.0692267701
+##                  PC22          PC23          PC24
+##    [1,]  0.2606752351  5.117866e-01  0.4255111508
+##    [2,] -0.3464208085 -7.783657e-02 -0.1855884373
+##    [3,] -0.1985000867 -1.060028e-02  0.1186780422
+##    [4,] -0.2780383631  5.510501e-01  0.0815998178
+##    [5,] -0.9405938525 -7.580540e-01 -0.1240092998
+##    [6,] -0.4030948080 -4.650036e-01 -0.3881844879
+##    [7,]  0.4051377401 -2.758828e-01  0.1862657166
+##    [8,]  0.0956447749 -4.638298e-01 -0.1320150552
+##    [9,]  0.2298396891 -3.046036e-01  0.1667873768
+##   [10,]  0.0172030086 -5.613598e-01  0.1496903153
+##   [11,] -0.2037306601 -2.548238e-01 -0.2144570331
+##   [12,]  0.6186556251 -2.544970e-02  0.0164832755
+##   [13,] -0.1733956314  3.458353e-02 -0.2020362855
+##   [14,]  0.3277566171 -3.366747e-01  0.5932048448
+##   [15,] -0.3415356262 -6.475144e-01 -0.3256733849
+##   [16,]  0.0056405386  8.434929e-02 -0.4155555414
+##   [17,] -0.3336973567  3.598982e-02  0.5403975443
+##   [18,] -0.0681032515 -2.609029e-02 -0.0841554544
+##   [19,] -0.2180835750  2.182869e-01  0.4568384384
+##   [20,] -0.0883690063 -2.044407e-01 -0.0391527390
+##   [21,]  0.4271886725  3.741307e-01  0.0371662376
+##   [22,]  0.0567592899 -1.698041e-01 -0.3091949183
+##   [23,]  0.1692791676  3.656501e-01 -0.1200687277
+##   [24,] -0.0042122865 -5.619589e-02  0.4232511227
+##   [25,]  0.4965968276 -5.981924e-02  0.5413506733
+##   [26,]  0.2668140707 -3.865956e-01 -0.0871281722
+##   [27,] -0.0144927532 -2.810771e-01  0.2104175725
+##   [28,]  0.0466821483  3.147344e-01  0.3335832550
+##   [29,] -0.6102934433  4.552291e-02 -0.1088491257
+##   [30,]  0.2532996494  8.325211e-01  0.0596210829
+##   [31,] -0.0172554742 -7.005283e-01  0.5796072951
+##   [32,] -0.0420318462 -1.197469e-02 -0.4992490084
+##   [33,]  0.1231450532 -6.235590e-01 -0.2718126114
+##                  PC25          PC26          PC27
+##    [1,] -0.0297544330 -0.2494997309 -0.0660487820
+##    [2,]  0.5465566837 -0.1707853806  0.0573566903
+##    [3,] -0.0617930500 -0.1301081465  0.4297077245
+##    [4,] -0.1191967616 -0.1820854644 -0.2966159478
+##    [5,] -0.1810888517  0.1579789914  0.2032319188
+##    [6,]  0.0161829373 -0.0768789147 -0.1890021908
+##    [7,]  0.5714387918 -0.1733062229 -0.0135630608
+##    [8,]  0.0435116883  0.0968825105  0.0361239857
+##    [9,]  0.0795342203 -0.2179337724 -0.0280519085
+##   [10,]  0.1192276874 -0.6402848133 -0.1684208166
+##   [11,]  0.4830177768  0.2585860400  0.1656443355
+##   [12,]  0.8012807891  0.2764115164 -0.0221185185
+##   [13,]  0.4212458810 -0.2586205455 -0.2318259309
+##   [14,] -0.3160926172  0.2930306564  0.0315799416
+##   [15,] -0.1863365985 -0.0106280740 -0.2821539717
+##   [16,] -0.5021864973  0.1920284657 -0.2274141335
+##   [17,] -0.1431597249  0.3997201177 -0.0481033605
+##   [18,] -0.1770219381 -0.0665569356  0.3611532806
+##   [19,] -0.4169195525  0.1342212706 -0.1372401736
+##   [20,]  0.0401363558  0.1926622172  0.0901537503
+##   [21,]  0.4277447025  0.0615161369 -0.5712587282
+##   [22,] -0.3148804972  0.1372520660  0.0813089600
+##   [23,]  0.4222957104 -0.3285194628  0.0925493967
+##   [24,] -0.2469079001 -0.1974959151 -0.1257202039
+##   [25,] -0.1700714274  0.1883536696 -0.6113643473
+##   [26,]  0.0260953422 -0.2776142922  0.1594554647
+##   [27,] -0.2412035180 -0.3407585999  0.0642962322
+##   [28,]  0.2889218019  0.1731209602  0.2412316168
+##   [29,] -0.3192036244  0.2061276212  0.2905124131
+##   [30,]  0.0623945908 -0.3518014887  0.0860232071
+##   [31,] -0.0502156945 -0.2301011210 -0.4474894087
+##   [32,] -0.1045515163  0.1329058267 -0.4092126816
+##   [33,] -0.0074496906 -0.0462915914 -0.0091735374
+##                  PC28          PC29          PC30
+##    [1,] -4.118784e-02  0.0747913749  0.4824541648
+##    [2,] -4.450928e-02  0.1983488012 -0.0545452485
+##    [3,] -2.422789e-01  0.2087064801  0.1651653817
+##    [4,]  5.477311e-01  0.1225076615  0.1905709717
+##    [5,]  1.724511e-01  0.3212178360  0.1311337837
+##    [6,] -1.626544e-01 -0.0594342160  0.2477111876
+##    [7,] -1.523922e-01  0.2926424287  0.2982726047
+##    [8,]  1.369472e-01 -0.1427530912 -0.1959000225
+##    [9,] -2.533642e-02  0.3949850490 -0.1945260720
+##   [10,] -3.973926e-01 -0.3076664673 -0.0210214185
+##   [11,] -2.863127e-01  0.4407351869 -0.0776859478
+##   [12,]  1.415949e-01 -0.2224286186  0.0245826893
+##   [13,]  9.189767e-01 -0.0138663130 -0.0456332642
+##   [14,]  3.207570e-01  0.1774287922  0.2360938849
+##   [15,]  1.064913e-01 -0.4176901841  0.0675202318
+##   [16,] -2.531840e-01  0.0852493813 -0.1806827976
+##   [17,]  1.712961e-01 -0.3375000161 -0.0445632157
+##   [18,]  4.451967e-01 -0.2118792243 -0.0037483797
+##   [19,]  1.068379e-01 -0.2590978522  0.0811362419
+##   [20,] -1.068990e-01  0.4073914144 -0.4432467479
+##   [21,] -7.029166e-02  0.0144854178 -0.3870033072
+##   [22,]  2.737751e-01 -0.0489928919 -0.1968142932
+##   [23,] -3.534494e-01 -0.1772094803  0.3869563742
+##   [24,]  2.899841e-01  0.1532929393 -0.3171594078
+##   [25,] -1.516290e-01 -0.2421432154  0.2478355450
+##   [26,] -1.832428e-01 -0.3649506163  0.2064930727
+##   [27,] -1.536383e-01  0.3335648898  0.5298153002
+##   [28,]  7.837078e-01 -0.6522152431 -0.0404608610
+##   [29,]  9.871805e-02 -0.2904237923 -0.2512475428
+##   [30,] -1.717537e-01 -0.1907410987  0.1455593674
+##   [31,] -4.223503e-01 -0.1099567737  0.2398531608
+##   [32,] -2.482441e-01 -0.0756558644 -0.1624747868
+##   [33,] -7.481628e-02 -0.0057854465 -0.1883130058
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 967 rows ]</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="principal-component-analysis.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now looking at rotation</span></span>
 <span id="cb26-2"><a href="principal-component-analysis.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="principal-component-analysis.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pr_out<span class="sc">$</span>rotation[,k])</span></code></pre></div>
-<pre><code>## [1] -0.22431148 -0.21057597  0.03151215
-## [4]  0.32194265 -0.01984672 -0.29001669</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="principal-component-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#kth eigenvector which correspods with the kth largest value (most significant) value</span></span>
+<span id="cb26-3"><a href="principal-component-analysis.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(observ_x, <span class="dv">1</span> ) <span class="sc">%*%</span> pr_out<span class="sc">$</span>rotation[,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>##           [,1]
+## [1,] 0.8534236</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="principal-component-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#k is which column are we going to examine</span></span>
 <span id="cb28-2"><a href="principal-component-analysis.html#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="principal-component-analysis.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="principal-component-analysis.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#this will always be 1. Property of rotation matrix</span></span>
-<span id="cb28-5"><a href="principal-component-analysis.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pr_out<span class="sc">$</span>rotation[,k]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb28-3"><a href="principal-component-analysis.html#cb28-3" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb28-4"><a href="principal-component-analysis.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr_out<span class="sc">$</span>rotation[, j])</span>
+<span id="cb28-5"><a href="principal-component-analysis.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="principal-component-analysis.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">abs</span>(pr_out<span class="sc">$</span>rotation[, j]) <span class="sc">&gt;</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1]  4  6 11 12 23 27</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="principal-component-analysis.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what is the truth we should be comparing to?</span></span>
+<span id="cb31-2"><a href="principal-component-analysis.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="principal-component-analysis.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="principal-component-analysis.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#What is rotation. Matrix (30 x 30 in this case)</span></span>
+<span id="cb31-5"><a href="principal-component-analysis.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pr_out<span class="sc">$</span>rotation)</span></code></pre></div>
+<pre><code>## [1] 30 30</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="principal-component-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#it is actually p x p rather than p x k to give you more columns</span></span>
+<span id="cb33-2"><a href="principal-component-analysis.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="principal-component-analysis.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pr_out<span class="sc">$</span>rotation[,k])</span></code></pre></div>
+<pre><code>## [1]  0.01219156  0.04262736  0.33938644 -0.03719539
+## [5]  0.03446081 -0.01993286</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="principal-component-analysis.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#kth eigenvector which correspods with the kth largest value (most significant) value</span></span>
+<span id="cb35-2"><a href="principal-component-analysis.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="principal-component-analysis.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="principal-component-analysis.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#this will always be 1. Property of rotation matrix</span></span>
+<span id="cb35-5"><a href="principal-component-analysis.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pr_out<span class="sc">$</span>rotation[,k]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 
 </div>
@@ -344,8 +711,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="principal-component-analysis-applied.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

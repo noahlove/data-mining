@@ -2,21 +2,89 @@
 
 ## Citation data
 
+### Other example
+In really poor countries it is super hard to measure wealth and income. There are no reciepts and corresponding taxes. People don't have bank accounts. Instead, you measure features. Like do you have a fridge. Do you have cooking equipment? How many kids? How many room in your house? 
+
+So you could run PCA on assets matrix. You can find correlations. If you have more rooms in your house, you likely have more education. The correlations will be baked into the principal driving component. Further, they use this as the Y to see if they can predict! But that is beyond the scope of this class. 
+
+
+
+
 ```{r}
 library(jsonlite)
-citations <- read.csv("../../../usecases_data/explore_paper/j_cunningham_citation.csv")
-titles <- read_json("../../../usecases_data/explore_paper/j_cunningham_citation_titles.json")
+citations <- read.csv("Datasets/j_cunningham_citation.csv", head = FALSE)
+titles <- read_json("Datasets/j_cunningham_citation_titles.json")
+```
+
+#Explore the data
+```{r}
+dim(citations)
+
+head(citations)
+citations[1:5,1:5]
+max(citations)
+
+#across all paers
+apply(citations, 1, max)
 
 ```
 
 ```{r}
-dim(citations)
+names(titles)
+
+
+
+
 ```
+
+Papers that he has written: 
+```{r}
+head(titles[["auth_titles"]],3)
+```
+
+Papers he has cited
+```{r}
+head(titles[["ref_titles"]],3)
+```
+
+Among the 15, there are four papers that reference the 2 most popular articles. Let us find them:
+
+```{r}
+ref_count <- apply(citations, 2, function(x) 
+sum(x > 0))
+
+targets <- tail(names(sort(ref_count)),2)
+
+#These are the two columns we want
+target_ind <- which(names(citations) %in% targets)
+
+target_ind
+
+titles[["ref_titles"]][target_ind]
+```
+
+Explore this data: we know the index of the two. This can show the correlation between the two, meaning the papers are cited by certain papers. This would make sense. If you cite one of these, you almost certainly have to cite the other:
+
+```{r}
+citations[,target_ind]
+```
+
+We would intuitively jus apply our prcomp, like we learned in last class. 
+```{r}
+pr_out <- prcomp(citations)
+plot(pr_out$sdev, main="")
+```
+This plot is not very appealing. There is not a significant drop until the last term. Maybe between 1 and 2 and 3 and 4, but not a big drop. And if you only abandon 1 dimension, (14 instead of 15), you aren't really saving a lot. 
+
+
+
+
+
 
 ```{r}
 pr_out <- prcomp(citations)
 plot(pr_out$sdev, main="")
-png("~/Desktop/loadings.png", 900, 700)
+png("Datasets/loadings.png", 900, 700)
 par(mfrow=c(4, 3))
 for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     eigenvec <- pr_out$rotation[, i]
@@ -25,5 +93,10 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
 }
 dev.off()
 
+titles[["ref_titles"]][target_ind]
 ```
+
+1st column second row is 
+
+2nd column 3rd row is a disaster. 
 

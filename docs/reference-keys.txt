@@ -5,3 +5,6 @@ principal-component-analysis
 principle-component-analysis
 typical-machine-learning-approach
 what-we-would-do-in-data-mining
+principal-component-analysis-applied
+citation-data
+other-example
