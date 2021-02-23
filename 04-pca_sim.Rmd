@@ -1,9 +1,6 @@
 
 # Principal Component Analysis
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Principle Component Analysis
 
@@ -141,9 +138,12 @@ dim(observ_x)
 #these will be the same, but we choose a cutoff. 
 
 
+
 W <- pr_out$x[, 1:cutoff]
 df_w <- data.frame(y, W)
 
+
+#PCA doesn't have to be lm. It could be ridge or lasso too
 #should be like the ols from above
 pca <- lm(y ~ ., df_w, subset=train)
 #same prediction
@@ -158,8 +158,27 @@ mean((df_w$y[-train] - pca_pred)^2)
 
 ## What we would do in data mining
 ```{r}
+k <- 3
+plot(pr_out$rotation[,k])
+abline(h = 0)
+which(abs(pr_out$rotation[, k]) > 0.2)
+
+#what is the truth we should be comparing to?
+
+pr_out <- prcomp(observ_x)
+
+
+test_x <- scale(observ_x, scale = FALSE) %*%
+pr_out$rotation
+pr_out$x
 
 #Now looking at rotation
+
+head(observ_x, 1 ) %*% pr_out$rotation[,1]
+
+
+
+
 
 #k is which column are we going to examine
 
