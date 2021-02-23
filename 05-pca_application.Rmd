@@ -1,0 +1,29 @@
+# Principal Component Analysis Applied!
+
+## Citation data
+
+```{r}
+library(jsonlite)
+citations <- read.csv("../../../usecases_data/explore_paper/j_cunningham_citation.csv")
+titles <- read_json("../../../usecases_data/explore_paper/j_cunningham_citation_titles.json")
+
+```
+
+```{r}
+dim(citations)
+```
+
+```{r}
+pr_out <- prcomp(citations)
+plot(pr_out$sdev, main="")
+png("~/Desktop/loadings.png", 900, 700)
+par(mfrow=c(4, 3))
+for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
+    eigenvec <- pr_out$rotation[, i]
+    plot(eigenvec)
+    abline(h=0)
+}
+dev.off()
+
+```
+
