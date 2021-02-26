@@ -71,13 +71,76 @@ citations[,target_ind]
 
 We would intuitively jus apply our prcomp, like we learned in last class. 
 ```{r}
+
 pr_out <- prcomp(citations)
 plot(pr_out$sdev, main="")
 ```
 This plot is not very appealing. There is not a significant drop until the last term. Maybe between 1 and 2 and 3 and 4, but not a big drop. And if you only abandon 1 dimension, (14 instead of 15), you aren't really saving a lot. 
 
 
+#### Try standardizing the citation matrix in different ways
 
+##### Usual standardization, i.e. make each feature mean=0 and sd = 1
+```{r}
+
+norm_citation <- apply(citations, 2 , scale)
+#also
+
+pr_out <- prcomp(norm_citation)
+
+plot(pr_out$sdev, main="")
+
+
+png("Datasets/loadings_normal_standardization.png", 900, 700)
+par(mfrow=c(4, 3))
+for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
+    eigenvec <- pr_out$rotation[, i]
+    plot(eigenvec)
+    abline(h=0)
+}
+dev.off()
+
+titles[["ref_titles"]][target_ind]
+```
+This is bad! You subtract something away from 0 values. But we like 0s becasue they don't affect the objective function.
+
+
+##### Max normalized, i.e. make each feature min=0, max = 1
+```{r}
+pr_out <- prcomp(citations)
+plot(pr_out$sdev, main="")
+png("Datasets/loadings_max_normalized.png", 900, 700)
+par(mfrow=c(4, 3))
+for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
+    eigenvec <- pr_out$rotation[, i]
+    plot(eigenvec)
+    abline(h=0)
+}
+dev.off()
+
+titles[["ref_titles"]][target_ind]
+```
+
+
+##### Max normalized per paper, i.e. make each ROW min=0, max = 1
+```{r}
+
+citations_norm <- as.data.frame(t(apply(citations, 1, function(x)(x-min(x))/(max(x)-min(x)))))
+citations_norm
+
+pr_out <- prcomp(citations_norm)
+plot(pr_out$sdev, main="")
+png("Datasets/loadings_norm_per_paper.png", 900, 700)
+par(mfrow=c(4, 3))
+for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
+    eigenvec <- pr_out$rotation[, i]
+    plot(eigenvec)
+    abline(h=0)
+}
+dev.off()
+
+titles[["ref_titles"]][target_ind]
+```
 
 
 

@@ -8,3 +8,11 @@ what-we-would-do-in-data-mining
 principal-component-analysis-applied
 citation-data
 other-example
+try-standardizing-the-citation-matrix-in-different-ways
+usual-standardization-i.e.-make-each-feature-mean0-and-sd-1
+max-normalized-i.e.-make-each-feature-min0-max-1
+max-normalized-per-paper-i.e.-make-each-row-min0-max-1
+pca-on-weather-data-example
+different-noramlizations
+no-normalization
+centering-and-scaling

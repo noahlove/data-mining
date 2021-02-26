@@ -1,6 +1,9 @@
 
 # Principal Component Analysis
 
+Sparcity: 
+
+Inbalanced data:
 
 ## Principle Component Analysis
 

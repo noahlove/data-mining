@@ -1,0 +1,171 @@
+# PCA on weather data example 
+
+- Wrap up the citation problem
+- Play with weather data, tmax, celsius
+
+```{r}
+df <- read.csv("Datasets/ushcn.csv")
+station <- read.csv("Datasets/station_metadata.csv")
+rownames(station) <- station$id
+meta_sort <- station[names(df)[-1], c("longitude", "latitude")]
+
+prop_na <- apply(df[, -1], 1,
+                 function(x) mean(is.na(x)))
+
+sdf <- df[prop_na < 0.1, ]
+sdf_sans_na <- apply(sdf[, -1], 2, function(x){
+  x[is.na(x)] <- mean(x, na.rm=TRUE)
+  return(x)
+})
+
+library(RColorBrewer)
+cols <- brewer.pal(7, "RdYlBu")
+
+pr_out <- prcomp(sdf_sans_na)
+png("Pictures/no_norm_pca.png", 600, 800)
+par(mfrow=c(2, 1))
+for(i in 1:2){
+  eigvec <- pr_out$rotation[, i]
+  breaks <- seq(min(eigvec), max(eigvec), length.out=length(cols)+1)
+  col_factors <- cut(eigvec, breaks=breaks)
+  plot(meta_sort$longitude,
+       meta_sort$latitude,
+       col=cols[col_factors],
+       pch=16, cex=0.5)
+  legend("bottomright",
+         legend = levels(col_factors),
+         fill=cols)
+}
+dev.off()
+
+```
+![Eigenvector 1 and two mapped](Pictures/no_norm_pca.png)
+
+The two are telling in very different ways. The first shows the relationships of the coasts. The second shows east versus west. This is with default normalization: centering, but not scaling. 
+
+
+
+## Different noramlizations
+
+Run PCA with 3 different types of normalization on the maximum temperature data, then plot the "maps" of the loading values corresponding to the first 2 eigenvectors.
+
+- No normalization, i.e. no centering and no scaling
+- Centering but no scaling
+- Centering and scaling
+
+Write out what do you observe.
+
+### No normalization
+
+```{r}
+prop_na <- apply(df[, -1], 1,
+                 function(x) mean(is.na(x)))
+
+sdf <- df[prop_na < 0.1, ]
+sdf_sans_na <- apply(sdf[, -1], 2, function(x){
+  x[is.na(x)] <- mean(x, na.rm=TRUE)
+  return(x)
+})
+
+cols <- brewer.pal(7, "RdYlBu")
+
+pr_out <- prcomp(sdf_sans_na, scale = FALSE, center = FALSE)
+png("Pictures/no_standardization_pca.png", 600, 800)
+par(mfrow=c(2, 1))
+for(i in 1:2){
+  eigvec <- pr_out$rotation[, i]
+  breaks <- seq(min(eigvec), max(eigvec), length.out=length(cols)+1)
+  col_factors <- cut(eigvec, breaks=breaks)
+  plot(meta_sort$longitude,
+       meta_sort$latitude,
+       col=cols[col_factors],
+       pch=16, cex=0.5)
+  legend("bottomright",
+         legend = levels(col_factors),
+         fill=cols)
+}
+dev.off()
+
+```
+
+
+
+
+
+### Centering and scaling
+
+```{r}
+prop_na <- apply(df[, -1], 1,
+                 function(x) mean(is.na(x)))
+
+sdf <- df[prop_na < 0.1, ]
+sdf_sans_na <- apply(sdf[, -1], 2, function(x){
+  x[is.na(x)] <- mean(x, na.rm=TRUE)
+  return(x)
+})
+
+library(RColorBrewer)
+
+pr_out <- prcomp(sdf_sans_na, center = TRUE, scale = TRUE)
+png("Pictures/centering_and_scaling_pca.png", 600, 800)
+par(mfrow=c(2, 1))
+for(i in 1:2){
+  eigvec <- pr_out$rotation[, i]
+  breaks <- seq(min(eigvec), max(eigvec), length.out=length(cols)+1)
+  col_factors <- cut(eigvec, breaks=breaks)
+  plot(meta_sort$longitude,
+       meta_sort$latitude,
+       col=cols[col_factors],
+       pch=16, cex=0.5)
+  legend("bottomright",
+         legend = levels(col_factors),
+         fill=cols)
+}
+dev.off()
+
+```
+Scaling is super common. When you have different units you always usually scale.  However, sometimes, with things like weather data, you might not have to. PCA is trying to find a very consice, uncorrelated description of your data. If things are close to 0, they won't effect. 
+
+
+Subset out the last 144 rows for testing, then pick one station to be our Y and the other stations to be our X.
+
+- Run PCA on the X values, then fit an OLS
+- Run OLS but only use the closest station (don't bother with projecting, assuming Long/Lat are equidistance for now) as your X.
+
+Which one will do best?
+
+(if you have time, try Lasso with all of the data, this may take awhile....don't do this unless you have time)
+
+```{r}
+#Takes last 144 for testing
+train <- 1:(nrow(sdf_sans_na) - 144)
+
+# Samples and individual X to be the Y point
+y_ind <- sample(ncol(sdf_sans_na), 1)
+
+
+y_train <- sdf_sans_na[train, y_ind]
+
+x_train <- sdf_sans_na[train, -y_ind]
+
+pr_out <- prcomp(x_train, center = TRUE, scale = FALSE)
+
+ols <- lm(y_train ~ x_train)
+
+library(tidyverse)
+
+station_new <- station %>% 
+  mutate(long_difference = longitude - station$longitude[y_ind]) %>% 
+  mutate(lat_difference = latitude - station$latitude[y_ind]) %>% 
+  select(latitude, longitude, long_difference, lat_difference) %>% 
+  mutate(sum_lat_long = lat_difference + long_difference) #%>% 
+  #order(decreasing = TRUE, sum_lat_long)
+  
+
+station_new
+
+#closest <- which(min(station$longitude + station$latitude))
+
+
+```
+
