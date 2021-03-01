@@ -12,7 +12,10 @@ So you could run PCA on assets matrix. You can find correlations. If you have mo
 
 ```{r}
 library(jsonlite)
+
+#citation count between his 15 papers and those he sighted
 citations <- read.csv("Datasets/j_cunningham_citation.csv", head = FALSE)
+
 titles <- read_json("Datasets/j_cunningham_citation_titles.json")
 ```
 
@@ -68,8 +71,9 @@ Explore this data: we know the index of the two. This can show the correlation b
 ```{r}
 citations[,target_ind]
 ```
+A few things to remember. Longer papers should have more citations. There is also likely to be correlation between certain papers. 
 
-We would intuitively jus apply our prcomp, like we learned in last class. 
+We would intuitively just want to apply our "prcomp", like we learned in last class. 
 ```{r}
 
 pr_out <- prcomp(citations)
@@ -90,45 +94,58 @@ pr_out <- prcomp(norm_citation)
 
 plot(pr_out$sdev, main="")
 
-
 png("Datasets/loadings_normal_standardization.png", 900, 700)
 par(mfrow=c(4, 3))
 for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     eigenvec <- pr_out$rotation[, i]
-    plot(eigenvec)
+    plot(eigenvec, main = paste("Eigenvec",i))
     abline(h=0)
 }
 dev.off()
 
-titles[["ref_titles"]][target_ind]
 ```
-This is bad! You subtract something away from 0 values. But we like 0s becasue they don't affect the objective function.
+![Plots using normal standardization](Datasets/loadings_normal_standardization.png)
+
+Remember from the plot, if we square all the values and add them together they will equal one. So strong deviations will be papers that are relied on (by index). Too many papers that share the same weight, might not be helpful. We believe there are only a few really good papers that we want. Not like 50. So this behavior is still undesirable. 
+
+This is bad! You subtract something away from 0 values. But we like 0s because they don't affect the objective function. PCA is using the "frebenious norm" where everything squared and added together is 1. So we like 0s. So how can we scale differently, but while keeping the 0s. 
 
 
 ##### Max normalized, i.e. make each feature min=0, max = 1
 ```{r}
-pr_out <- prcomp(citations)
-plot(pr_out$sdev, main="")
-png("Datasets/loadings_max_normalized.png", 900, 700)
+#lets divide by the max, then everything is between 0 and one
+norm_citation <- apply(citations, 2,
+                       function(x) x / max(x))
+
+pr_out <- prcomp(norm_citation, center=FALSE,
+                 scale=FALSE)
+
+png("Datasets/max_normalized.png", 900, 700)
 par(mfrow=c(4, 3))
 for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     eigenvec <- pr_out$rotation[, i]
-    plot(eigenvec)
+    plot(eigenvec, main = paste("Eigenvec",i))
     abline(h=0)
 }
-dev.off()
 
-titles[["ref_titles"]][target_ind]
+dev.off()
 ```
+This should look much nicer. For example, Eigvec 4 looks better. Why did we normalize the columns? We often do this because the columns have different units. However, in this, the columns all have the same units. Instead, papers have different lengths, so the citation number can be affected by the length of the paper. So whay do we want to actually normalize? The rows!
 
 
 ##### Max normalized per paper, i.e. make each ROW min=0, max = 1
 ```{r}
+citations_norm_papers <-  apply(citations, 1,
+                       function(x) x / max(x))
 
-citations_norm <- as.data.frame(t(apply(citations, 1, function(x)(x-min(x))/(max(x)-min(x)))))
-citations_norm
 
-pr_out <- prcomp(citations_norm)
+# Just doing the above actually swapped things! We have 15 columns instead
+#It processes a row, and then stacks it as a column. So we need to transpose
+citations_norm_papers <- t(citations_norm_papers)
+
+
+pr_out <- prcomp(citations_norm_papers)
+
 plot(pr_out$sdev, main="")
 png("Datasets/loadings_norm_per_paper.png", 900, 700)
 par(mfrow=c(4, 3))
@@ -139,8 +156,10 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
 }
 dev.off()
 
-titles[["ref_titles"]][target_ind]
 ```
+
+Ther is a much more noticable drop between 11 and 12
+
 
 
 
@@ -156,10 +175,17 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
 }
 dev.off()
 
+target_ind <- which(abs(pr_out$rotation[, 2]) > 0.15)
 titles[["ref_titles"]][target_ind]
 ```
 
 1st column second row is 
 
 2nd column 3rd row is a disaster. 
+
+
+### Fishing out various titles
+
+
+
 

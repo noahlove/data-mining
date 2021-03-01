@@ -1,5 +1,4 @@
 a-brief-introduction
-the-pool-of-tears
 a-caucus-race-and-a-long-tale
 principal-component-analysis
 principle-component-analysis
@@ -12,7 +11,18 @@ try-standardizing-the-citation-matrix-in-different-ways
 usual-standardization-i.e.-make-each-feature-mean0-and-sd-1
 max-normalized-i.e.-make-each-feature-min0-max-1
 max-normalized-per-paper-i.e.-make-each-row-min0-max-1
+fishing-out-various-titles
 pca-on-weather-data-example
 different-noramlizations
 no-normalization
 centering-and-scaling
+tidyverse-tools
+select
+original-data-set
+other-select-functions
+filter
+logical-tests-in-r
+mutate
+useful-mutate-functions
+summarise-summarize
+useful-summary-functions
