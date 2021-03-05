@@ -16,6 +16,14 @@ pca-on-weather-data-example
 different-noramlizations
 no-normalization
 centering-and-scaling
+comparing-different-models
+question-0
+question-1
+question-2
+question-3
+question-4
+question-5
+question-6
 tidyverse-tools
 select
 original-data-set
@@ -26,3 +34,5 @@ mutate
 useful-mutate-functions
 summarise-summarize
 useful-summary-functions
+arrange
+group_by

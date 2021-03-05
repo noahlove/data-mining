@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 A caucus-race and a long tale | Data Mining</title>
-  <meta name="description" content="Chapter 2 A caucus-race and a long tale | Data Mining" />
+  <title>Chapter 6 Comparing different models | Data Mining</title>
+  <meta name="description" content="Chapter 6 Comparing different models | Data Mining" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 A caucus-race and a long tale | Data Mining" />
+  <meta property="og:title" content="Chapter 6 Comparing different models | Data Mining" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 A caucus-race and a long tale | Data Mining" />
+  <meta name="twitter:title" content="Chapter 6 Comparing different models | Data Mining" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="principal-component-analysis.html"/>
+<link rel="prev" href="pca-on-weather-data-example.html"/>
+<link rel="next" href="tidyverse-tools.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -209,17 +209,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-caucus-race-and-a-long-tale" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> A caucus-race and a long tale</h1>
+<div id="comparing-different-models" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Comparing different models</h1>
+<p>This homework is to meant for you practice some feature engineering with the
+different regression models.</p>
+<p>Context: the US is increasingly polarized and <a href="https://twitter.com/home">Twitter</a>, a social
+media platform, is providing the space for people to voice their opinions or find like-minded
+individuals. In this assignment, we will use Twitter data <code>non_retweets_dc_inaug_steal.csv</code> on CourseWorks
+that has contains the token frequencies. This has been processed somewhat to minimize the data size.
+The non-token variables are <code>created_at</code>, <code>like_count</code>, <code>reply_count</code>, <code>retweet_count</code>, <code>tweet_body</code>.</p>
+<p>Please <strong>re-download</strong> this dataset given there were issues with the version given in class.</p>
+<p>The tweets are collected overtime with the query words “steal”, “inaguration”, and “washington dc” using
+Twitter’s <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent">Recent Search API</a>.
+Calls were made once a day around midnight and there is a limit on the number of queries that
+can be made freely.</p>
+<div id="question-0" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Question 0</h2>
+<p>What dates do the tweets cover? Please visualize the temporal distribution of the tweets
+with the intent to understand where most Tweets in the dataset came from in time.</p>
+</div>
+<div id="question-1" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Question 1</h2>
+<p>Please combine all the token frequencies that contain the string <code>inaug</code> into a single column.
+You should remove the redundant tokens after this summarization. Please select the method
+of “combining” that is consistent with the “token frequency” concept.</p>
+<p>Please report the fraction of records that have non-zero frequencies for this new column.</p>
+</div>
+<div id="question-2" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Question 2</h2>
+<p>We want to discover the topics correlated with the inauguration over time. To achieve this,
+please model your new column from Question 1 against all other tokens (i.e. exclude the non-token variables)
+using the following models. This is <strong>time-consuming</strong>! You should use <code>Sys.time()</code> to have a realistic expectation of how long each model will take.</p>
+<p>Please plot the MSE from a 5-fold cross validation to compare the prediction accuracy between
+- OLS
+- Please ignore the rank deficient warning, this is a warning of high-collinearity
+that is common with high dimensional data and why OLS shouldn’t do well.
+- stepwise regression using AIC as the objective</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="comparing-different-models.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ols = lm(y ~ ., df)</span></span>
+<span id="cb87-2"><a href="comparing-different-models.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ols_summ = summary(ols)$coefficients</span></span>
+<span id="cb87-3"><a href="comparing-different-models.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="co"># okay_features = rownames(ols_summ)[ols_summ[, 4] &lt; 0.05]</span></span>
+<span id="cb87-4"><a href="comparing-different-models.html#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># init_formula = paste(&#39;y ~&#39;, paste(okay_features, collapse=&#39;+&#39;))</span></span>
+<span id="cb87-5"><a href="comparing-different-models.html#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="co"># init_mod = lm(init_fomrula, df)</span></span>
+<span id="cb87-6"><a href="comparing-different-models.html#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="co"># # &quot;~.&quot; sets the upper model for the `scope` as using all of the features</span></span>
+<span id="cb87-7"><a href="comparing-different-models.html#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step_mod &lt;- step(init_mod, &quot;~.&quot;)</span></span></code></pre></div>
+<ul>
+<li>Lasso corresponding to <span class="math display">\[\lambda\]</span>=<code>lambda.min</code> from cv.glmnet
+<ul>
+<li>hint: <a href="https://www.rdocumentation.org/packages/glmnet/versions/4.1/topics/predict.cv.glmnet">predict.cv.glmnet</a></li>
+<li>hint: you may want to convert the training X matrix into sparse matrices, i.e. <code>Matrix(as.matrix(df_sans_y), sparse=TRUE)</code>
+to speed things up. This essentially avoids many multiplications when a 0 is involved.</li>
+</ul></li>
+<li>Ridge regression corresponding to <span class="math display">\[\lambda\]</span>=<code>lambda.min</code> from cv.glmnet</li>
+</ul>
+<p>Please <strong>do not</strong> normalize your features for this problem but use the raw frequencies.</p>
+<p>hint, adding some print statements can help with unnecessary panics:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="comparing-different-models.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(caret)</span></span>
+<span id="cb88-2"><a href="comparing-different-models.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># test_folds &lt;- createFolds(DEP_VARIABLE, k=5)</span></span>
+<span id="cb88-3"><a href="comparing-different-models.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for(i in seq_along(test_folds)){</span></span>
+<span id="cb88-4"><a href="comparing-different-models.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb88-5"><a href="comparing-different-models.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Some code that isolates the test/train data!</span></span>
+<span id="cb88-6"><a href="comparing-different-models.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb88-7"><a href="comparing-different-models.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(paste(&quot;cross validation fold&quot;, i))</span></span>
+<span id="cb88-8"><a href="comparing-different-models.html#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     t0 &lt;- Sys.time()</span></span>
+<span id="cb88-9"><a href="comparing-different-models.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     ols &lt;- lm(TRAIN_DEP_VARIABLE ~ TRAIN_INDEP_VARIABLE)</span></span>
+<span id="cb88-10"><a href="comparing-different-models.html#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(paste(&#39;running OLS took&#39;, Sys.time() - t0))</span></span>
+<span id="cb88-11"><a href="comparing-different-models.html#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     }</span></span></code></pre></div>
+<p>Side comment:
+- You may want to see how the <code>lambda.1se</code> compares.
+- (personal observation) Normalizing the features does help with the optimization but our features are
+all token frequencies so it’s not as big of a concern.</p>
+</div>
+<div id="question-3" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Question 3</h2>
+<p>For the algorithm that performed the best, please retrain the model with the following requirements:
+- Use all of the data, i.e. do not reserve data for test/train.
+- You may need to normalize the features. If Lasso/Ridge was best, note that sparsity will not hold after
+you normalize.</p>
+<p>Please plot the distribution of the coefficients.</p>
+</div>
+<div id="question-4" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Question 4</h2>
+<p>Please list out the top tokens corresponding to the strongest non-zero coefficients.</p>
+<p>Side comment: If you are not an American, what do these tokens and their coefficients
+suggest about the inauguration?</p>
+</div>
+<div id="question-5" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Question 5</h2>
+<p>Please write a function that represents the objective function for Ridge regression, i.e. your function should take in a vector of coefficients, a matrix X, and a vector Y and return a real number.
+- Please make sure you fit an intercept within the function but do not include the intercept in your regularization term for the objective.
+- Please add an additional argument called <code>shrink_target</code> that allows us to change the shrinkage of the coefficients to arbitrary vector.
+- Please make sure you set the default for this argument to align with the usual Ridge regression.</p>
+</div>
+<div id="question-6" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Question 6</h2>
+<p>Please perform PCA on the token frequencies without normalizing.
+- Plot the eigenvalues in order (not the cumulative eigenvalues) of their magnitude, how many components might have interesting features. There are many correct answers but also many wrong answers here depending on your plot.
+- Analyze the loadings from the first 2 components, do they seem meaningful to you given the dataset?
+- if yes, what key tokens are associated with these 2 components and why do they carry meaning?
+- if no, how could you modify the token frequencies to get more meaningful principle components?</p>
+<p>Side comment (things to think about):
+- what would you do after identifying the components?
+- again, if you were not involved in American politics, how would you have done some of these steps?
+- Twitter data is not like normal language, e.g. people do not use complete sentences. How might this look if we had journal articles?</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="principal-component-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pca-on-weather-data-example.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -250,7 +351,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/noahlove/data-mining/edit/master/03-race.Rmd",
+"link": "https://github.com/noahlove/data-mining/edit/master/07-comparing_different_models.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -258,7 +359,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/noahlove/data-mining/blob/master/03-race.Rmd",
+"link": "https://github.com/noahlove/data-mining/blob/master/07-comparing_different_models.Rmd",
 "text": null
 },
 "download": null,
