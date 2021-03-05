@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Classification | Data Mining</title>
+  <meta name="description" content="Chapter 4 Classification | Data Mining" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Classification | Data Mining" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Classification | Data Mining" />
+  
+  
+  
+
+<meta name="author" content="Noah Love" />
+
+
+<meta name="date" content="2021-03-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-regresssion.html"/>
+<link rel="next" href="linear-model-selection.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A Brief Introduction</a></li>
+<li class="chapter" data-level="2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html"><i class="fa fa-check"></i><b>2</b> Tidyverse tools</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#select"><i class="fa fa-check"></i><b>2.1</b> Select</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#original-data-set"><i class="fa fa-check"></i><b>2.1.1</b> Original Data Set</a></li>
+<li class="chapter" data-level="2.1.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#other-select-functions"><i class="fa fa-check"></i><b>2.1.2</b> Other select functions:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#filter"><i class="fa fa-check"></i><b>2.2</b> Filter</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#logical-tests-in-r"><i class="fa fa-check"></i><b>2.2.1</b> Logical Tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#mutate"><i class="fa fa-check"></i><b>2.3</b> Mutate</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-mutate-functions"><i class="fa fa-check"></i><b>2.3.1</b> Useful mutate functions:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#summarise-summarize"><i class="fa fa-check"></i><b>2.4</b> Summarise / Summarize</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-summary-functions"><i class="fa fa-check"></i><b>2.4.1</b> Useful summary functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#arrange"><i class="fa fa-check"></i><b>2.5</b> Arrange()</a></li>
+<li class="chapter" data-level="2.6" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#group_by"><i class="fa fa-check"></i><b>2.6</b> Group_by()</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regresssion.html"><a href="linear-regresssion.html"><i class="fa fa-check"></i><b>3</b> Linear Regresssion</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#non-linear-data"><i class="fa fa-check"></i><b>3.1</b> Non linear data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#interactions-subtracting-variables"><i class="fa fa-check"></i><b>3.1.1</b> Interactions + subtracting variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regresssion.html"><a href="linear-regresssion.html#last-trap-ording-of-the-data"><i class="fa fa-check"></i><b>3.2</b> Last trap, ording of the data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#missing"><i class="fa fa-check"></i><b>3.2.1</b> Missing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regresssion.html"><a href="linear-regresssion.html#glm"><i class="fa fa-check"></i><b>3.2.2</b> GLM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#music-dataset"><i class="fa fa-check"></i><b>4.1</b> Music dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#logistic-regression-review"><i class="fa fa-check"></i><b>4.2</b> Logistic Regression Review</a></li>
+<li class="chapter" data-level="4.3" data-path="classification.html"><a href="classification.html#resampling"><i class="fa fa-check"></i><b>4.3</b> Resampling</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="classification.html"><a href="classification.html#up-sampling"><i class="fa fa-check"></i><b>4.3.1</b> Up-sampling</a></li>
+<li class="chapter" data-level="4.3.2" data-path="classification.html"><a href="classification.html#bootstrapping"><i class="fa fa-check"></i><b>4.3.2</b> Bootstrapping</a></li>
+<li class="chapter" data-level="4.3.3" data-path="classification.html"><a href="classification.html#cross-validation"><i class="fa fa-check"></i><b>4.3.3</b> Cross Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-model-selection.html"><a href="linear-model-selection.html"><i class="fa fa-check"></i><b>5</b> Linear Model Selection</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#regression-requires-more-data-than-features"><i class="fa fa-check"></i><b>5.1</b> Regression requires more data than features</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#simulating-collinearity-sparsity"><i class="fa fa-check"></i><b>5.2</b> simulating collinearity + sparsity</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-model-selection.html"><a href="linear-model-selection.html#demo-on-glmnet-functionalities"><i class="fa fa-check"></i><b>5.3</b> Demo on glmnet functionalities</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principal-component-analysis"><i class="fa fa-check"></i><b>5.4</b> Principal Component Analysis</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principle-component-analysis"><i class="fa fa-check"></i><b>5.4.1</b> Principle Component Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="linear-model-selection.html"><a href="linear-model-selection.html#typical-machine-learning-approach"><i class="fa fa-check"></i><b>5.5</b> Typical machine learning approach</a></li>
+<li class="chapter" data-level="5.6" data-path="linear-model-selection.html"><a href="linear-model-selection.html#what-we-would-do-in-data-mining"><i class="fa fa-check"></i><b>5.6</b> What we would do in data mining</a></li>
+<li class="chapter" data-level="5.7" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principal-component-analysis-applied"><i class="fa fa-check"></i><b>5.7</b> Principal Component Analysis Applied!</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#other-example"><i class="fa fa-check"></i><b>5.7.1</b> Other example</a></li>
+<li class="chapter" data-level="5.7.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#explore-the-data"><i class="fa fa-check"></i><b>5.7.2</b> Explore the data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="linear-model-selection.html"><a href="linear-model-selection.html#pca-on-weather-data-example"><i class="fa fa-check"></i><b>5.8</b> PCA on weather data example</a></li>
+<li class="chapter" data-level="5.9" data-path="linear-model-selection.html"><a href="linear-model-selection.html#different-noramlizations"><i class="fa fa-check"></i><b>5.9</b> Different noramlizations</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#no-normalization"><i class="fa fa-check"></i><b>5.9.1</b> No normalization</a></li>
+<li class="chapter" data-level="5.9.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#centering-and-scaling"><i class="fa fa-check"></i><b>5.9.2</b> Centering and scaling</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="comparing-different-models.html"><a href="comparing-different-models.html"><i class="fa fa-check"></i><b>6</b> Comparing different models</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-0"><i class="fa fa-check"></i><b>6.1</b> Question 0</a></li>
+<li class="chapter" data-level="6.2" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-1"><i class="fa fa-check"></i><b>6.2</b> Question 1</a></li>
+<li class="chapter" data-level="6.3" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-2"><i class="fa fa-check"></i><b>6.3</b> Question 2</a></li>
+<li class="chapter" data-level="6.4" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-3"><i class="fa fa-check"></i><b>6.4</b> Question 3</a></li>
+<li class="chapter" data-level="6.5" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-4"><i class="fa fa-check"></i><b>6.5</b> Question 4</a></li>
+<li class="chapter" data-level="6.6" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-5"><i class="fa fa-check"></i><b>6.6</b> Question 5</a></li>
+<li class="chapter" data-level="6.7" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-6"><i class="fa fa-check"></i><b>6.7</b> Question 6</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="homework-3-project.html"><a href="homework-3-project.html"><i class="fa fa-check"></i><b>7</b> Homework 3 Project</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="homework-3-project.html"><a href="homework-3-project.html#hw1"><i class="fa fa-check"></i><b>7.1</b> HW1</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="homework-3-project.html"><a href="homework-3-project.html#q1"><i class="fa fa-check"></i><b>7.1.1</b> Q1</a></li>
+<li class="chapter" data-level="7.1.2" data-path="homework-3-project.html"><a href="homework-3-project.html#q2"><i class="fa fa-check"></i><b>7.1.2</b> Q2</a></li>
+<li class="chapter" data-level="7.1.3" data-path="homework-3-project.html"><a href="homework-3-project.html#q3"><i class="fa fa-check"></i><b>7.1.3</b> Q3</a></li>
+<li class="chapter" data-level="7.1.4" data-path="homework-3-project.html"><a href="homework-3-project.html#q4"><i class="fa fa-check"></i><b>7.1.4</b> Q4</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="homework-3-project.html"><a href="homework-3-project.html#r-markdown"><i class="fa fa-check"></i><b>7.2</b> R Markdown</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Mining</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="classification" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Classification</h1>
+<div id="music-dataset" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Music dataset</h2>
+<p>From the <a href="https://corgis-edu.github.io/corgis/">CORGIS data project</a> I’ve obtained a <a href="https://corgis-edu.github.io/corgis/csv/music/">music dataset</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="classification.html#cb1-1" aria-hidden="true" tabindex="-1"></a>music <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Datasets/music_hottest_song_only.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="classification.html#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(music<span class="sc">$</span>artist.terms <span class="sc">==</span> <span class="st">&quot;hip hop&quot;</span>)</span>
+<span id="cb1-3"><a href="classification.html#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> music<span class="sc">$</span>song.hotttnesss</span></code></pre></div>
+</div>
+<div id="logistic-regression-review" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Logistic Regression Review</h2>
+<p><span class="math inline">\(Y \sim Binomial(n=1, p(X))\)</span></p>
+<p><span class="math inline">\(p(X) = \frac{exp(X\beta)}{\exp(X\beta) + 1}\)</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="classification.html#cb2-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">exp</span>(x) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))}</span>
+<span id="cb2-2"><a href="classification.html#cb2-2" aria-hidden="true" tabindex="-1"></a>logistic_obj <span class="ot">&lt;-</span> <span class="cf">function</span>(params, X, y){</span>
+<span id="cb2-3"><a href="classification.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  xbeta <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X) <span class="sc">%*%</span> params</span>
+<span id="cb2-4"><a href="classification.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">logit</span>(xbeta)</span>
+<span id="cb2-5"><a href="classification.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dbinom</span>(y, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span>p, <span class="at">log=</span><span class="cn">TRUE</span>)))</span>
+<span id="cb2-6"><a href="classification.html#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="classification.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), logistic_obj, <span class="at">X=</span>x, <span class="at">y=</span>y)</span></code></pre></div>
+<pre><code>## $par
+## [1] -3.2070659  0.2257483
+## 
+## $value
+## [1] 721.6383
+## 
+## $counts
+## function gradient 
+##       63       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="classification.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Wayne created in class</span></span>
+<span id="cb4-2"><a href="classification.html#cb4-2" aria-hidden="true" tabindex="-1"></a>my_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x,</span>
+<span id="cb4-3"><a href="classification.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb4-4"><a href="classification.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(my_model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ x, family = binomial(logit))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.3151  -0.2971  -0.2883  -0.2520   2.6326  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.20585    0.07808 -41.059   &lt;2e-16 ***
+## x            0.22775    0.12107   1.881   0.0599 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1446.9  on 4411  degrees of freedom
+## Residual deviance: 1443.3  on 4410  degrees of freedom
+## AIC: 1447.3
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p>How to run logistic regression in R?</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="classification.html#cb6-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="fu">nrow</span>(music), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-2"><a href="classification.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="classification.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="classification.html#cb6-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),</span>
+<span id="cb6-5"><a href="classification.html#cb6-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">subset =</span> train)</span>
+<span id="cb6-6"><a href="classification.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#To use the model, we pass it to the predict function. We pass in the new data</span></span>
+<span id="cb6-7"><a href="classification.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#We pass in the compliment of the subset we used (train = !test)</span></span>
+<span id="cb6-8"><a href="classification.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#We also pass in response. </span></span>
+<span id="cb6-9"><a href="classification.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="classification.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#What is the probability that you think they are a 1 vs a 0</span></span>
+<span id="cb6-11"><a href="classification.html#cb6-11" aria-hidden="true" tabindex="-1"></a>test_probs <span class="ot">&lt;-</span></span>
+<span id="cb6-12"><a href="classification.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(mod, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x[<span class="sc">!</span>train]), <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb6-13"><a href="classification.html#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="classification.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(test_probs)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="classification.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This should feel absolutely like it is 0 and not one</span></span>
+<span id="cb8-2"><a href="classification.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(test_probs)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="classification.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Round the numbers</span></span>
+<span id="cb9-2"><a href="classification.html#cb9-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> test_probs <span class="sc">&gt;</span> <span class="fl">0.5</span></span>
+<span id="cb9-3"><a href="classification.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="classification.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Head the numbers</span></span>
+<span id="cb9-5"><a href="classification.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test_pred)</span></code></pre></div>
+<pre><code>##     1     2     3     4     5     6 
+## FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="classification.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How good is my prediction</span></span>
+<span id="cb11-2"><a href="classification.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#First, how many predications did we get correct</span></span>
+<span id="cb11-3"><a href="classification.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="classification.html#cb11-4" aria-hidden="true" tabindex="-1"></a>same_as_data <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(test_pred) <span class="sc">==</span> y[<span class="sc">!</span>train]</span>
+<span id="cb11-5"><a href="classification.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(same_as_data)</span></code></pre></div>
+<pre><code>## [1] 0.9655489</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="classification.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#About 96 percent. Seems really good.</span></span></code></pre></div>
+<p>Then we ask is the data unbalanced if you do you this for cancer in the general population for example. Could be bad if you have 96 percent accuracy</p>
+<p>We call this a classification error. The histogram should be a red flag. We are saying everything is 0, and then are just wrong when its 1. Iin this case, every song is not hip hop, and we are right 96% of the time.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">Y = 1</th>
+<th align="right">Y = 0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hat{Y}\)</span> = 1</td>
+<td align="center">A</td>
+<td align="right">B</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hat{Y}\)</span> = 0</td>
+<td align="center">C</td>
+<td align="right">D</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\frac{A}{A + C}\)</span> our recall! Of all the records that are “1”, how many are our model capturing</p>
+<p><span class="math inline">\(\frac{B}{B + D}\)</span> our precision! Of all the records that are “1”, how many are our model capturing</p>
+<p>The amazing thing is that we can actually make one of these one!</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="classification.html#cb14-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb14-2"><a href="classification.html#cb14-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> test_probs <span class="sc">&gt;</span> alpha</span>
+<span id="cb14-3"><a href="classification.html#cb14-3" aria-hidden="true" tabindex="-1"></a>truly1 <span class="ot">&lt;-</span> y[<span class="sc">!</span>train] <span class="sc">==</span><span class="dv">1</span></span>
+<span id="cb14-4"><a href="classification.html#cb14-4" aria-hidden="true" tabindex="-1"></a>called1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(test_pred)</span>
+<span id="cb14-5"><a href="classification.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="classification.html#cb14-6" aria-hidden="true" tabindex="-1"></a>recall <span class="ot">&lt;-</span> <span class="fu">sum</span>(called1 <span class="sc">&amp;</span> truly1)<span class="sc">/</span> <span class="fu">sum</span>(truly1)</span>
+<span id="cb14-7"><a href="classification.html#cb14-7" aria-hidden="true" tabindex="-1"></a>precision <span class="ot">&lt;-</span> <span class="fu">sum</span>(truly1 <span class="sc">&amp;</span> called1)<span class="sc">/</span> <span class="fu">sum</span>(called1)</span>
+<span id="cb14-8"><a href="classification.html#cb14-8" aria-hidden="true" tabindex="-1"></a>recall</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="classification.html#cb16-1" aria-hidden="true" tabindex="-1"></a>precision</span></code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+<p>Right now the recall is really bad: but lets make everything one and make our recall really good!</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="classification.html#cb18-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-2"><a href="classification.html#cb18-2" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> test_probs <span class="sc">&gt;</span> alpha</span>
+<span id="cb18-3"><a href="classification.html#cb18-3" aria-hidden="true" tabindex="-1"></a>truly1 <span class="ot">&lt;-</span> y[<span class="sc">!</span>train] <span class="sc">==</span><span class="dv">1</span></span>
+<span id="cb18-4"><a href="classification.html#cb18-4" aria-hidden="true" tabindex="-1"></a>called1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(test_pred)</span>
+<span id="cb18-5"><a href="classification.html#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="classification.html#cb18-6" aria-hidden="true" tabindex="-1"></a>recall <span class="ot">&lt;-</span> <span class="fu">sum</span>(called1 <span class="sc">&amp;</span> truly1)<span class="sc">/</span> <span class="fu">sum</span>(truly1)</span>
+<span id="cb18-7"><a href="classification.html#cb18-7" aria-hidden="true" tabindex="-1"></a>precision <span class="ot">&lt;-</span> <span class="fu">sum</span>(truly1 <span class="sc">&amp;</span> called1)<span class="sc">/</span> <span class="fu">sum</span>(called1)</span>
+<span id="cb18-8"><a href="classification.html#cb18-8" aria-hidden="true" tabindex="-1"></a>recall</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="classification.html#cb20-1" aria-hidden="true" tabindex="-1"></a>precision</span></code></pre></div>
+<pre><code>## [1] 0.03445108</code></pre>
+<p>Now lets make a sequence!</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="classification.html#cb22-1" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10000</span>)</span>
+<span id="cb22-2"><a href="classification.html#cb22-2" aria-hidden="true" tabindex="-1"></a>recalls <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(alphas))</span>
+<span id="cb22-3"><a href="classification.html#cb22-3" aria-hidden="true" tabindex="-1"></a>precisions <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(alphas))</span>
+<span id="cb22-4"><a href="classification.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="classification.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(alphas)){</span>
+<span id="cb22-6"><a href="classification.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  alpha <span class="ot">&lt;-</span> alphas[i]</span>
+<span id="cb22-7"><a href="classification.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  test_pred <span class="ot">&lt;-</span> test_probs <span class="sc">&gt;</span> alpha</span>
+<span id="cb22-8"><a href="classification.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  truly1 <span class="ot">&lt;-</span> y[<span class="sc">!</span>train] <span class="sc">==</span><span class="dv">1</span></span>
+<span id="cb22-9"><a href="classification.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  called1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(test_pred)</span>
+<span id="cb22-10"><a href="classification.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-11"><a href="classification.html#cb22-11" aria-hidden="true" tabindex="-1"></a>  recall <span class="ot">&lt;-</span> <span class="fu">sum</span>(called1 <span class="sc">&amp;</span> truly1)<span class="sc">/</span> <span class="fu">sum</span>(truly1)</span>
+<span id="cb22-12"><a href="classification.html#cb22-12" aria-hidden="true" tabindex="-1"></a>  precision <span class="ot">&lt;-</span> <span class="fu">sum</span>(truly1 <span class="sc">&amp;</span> called1)<span class="sc">/</span> <span class="fu">sum</span>(called1)</span>
+<span id="cb22-13"><a href="classification.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  recall[i] <span class="ot">&lt;-</span> recall</span>
+<span id="cb22-14"><a href="classification.html#cb22-14" aria-hidden="true" tabindex="-1"></a>  precision[i] <span class="ot">&lt;-</span> precision</span>
+<span id="cb22-15"><a href="classification.html#cb22-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-16"><a href="classification.html#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="classification.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(recalls, precisions)</span></span></code></pre></div>
+<p>What are the most popular “artist.terms” in the dataset?</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="classification.html#cb23-1" aria-hidden="true" tabindex="-1"></a>artists_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">table</span>(music<span class="sc">$</span>artist.terms), <span class="at">decreasing =</span>T)</span>
+<span id="cb23-2"><a href="classification.html#cb23-2" aria-hidden="true" tabindex="-1"></a>artists_sorted[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## hip hop 
+##     171</code></pre>
+<ul>
+<li>Choose one “artist.terms” to predict for, then try running logistic regression vs usual lm() on all of the other variables, do they pick up different variables? What would your next steps be?</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="classification.html#cb25-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">exp</span>(x) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(x))}</span>
+<span id="cb25-2"><a href="classification.html#cb25-2" aria-hidden="true" tabindex="-1"></a>logistic_obj <span class="ot">&lt;-</span> <span class="cf">function</span>(params, X, y){</span>
+<span id="cb25-3"><a href="classification.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  xbeta <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X) <span class="sc">%*%</span> params</span>
+<span id="cb25-4"><a href="classification.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">logit</span>(xbeta)</span>
+<span id="cb25-5"><a href="classification.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dbinom</span>(y, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span>p, <span class="at">log=</span><span class="cn">TRUE</span>)))</span>
+<span id="cb25-6"><a href="classification.html#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-7"><a href="classification.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), logistic_obj, <span class="at">X=</span>x, <span class="at">y=</span>y)</span></code></pre></div>
+<pre><code>## $par
+## [1] -3.2070659  0.2257483
+## 
+## $value
+## [1] 721.6383
+## 
+## $counts
+## function gradient 
+##       63       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<p>Imagine you’re doing fake news prediction, what metric(s) would you care more about the most? How would you recommend a target for these metrics for a company like Facebook?</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="classification.html#cb27-1" aria-hidden="true" tabindex="-1"></a>artist_cols <span class="ot">&lt;-</span></span>
+<span id="cb27-2"><a href="classification.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;^artist&quot;</span>, <span class="fu">names</span>(music))</span>
+<span id="cb27-3"><a href="classification.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="classification.html#cb27-4" aria-hidden="true" tabindex="-1"></a>my_mod <span class="ot">&lt;-</span></span>
+<span id="cb27-5"><a href="classification.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> music[,<span class="sc">!</span>artist_cols])</span>
+<span id="cb27-6"><a href="classification.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="classification.html#cb27-7" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span></span>
+<span id="cb27-8"><a href="classification.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> ., music[,<span class="sc">!</span>artist_cols])</span></code></pre></div>
+<p>We can plot this data and see the relationship!</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="classification.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">summary</span>(ols)<span class="sc">$</span>coefficients[, <span class="dv">4</span>], <span class="fu">summary</span>(my_mod)<span class="sc">$</span>coefficients[, <span class="dv">4</span>])</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>If we plot the coefficients, of logistic versus regression, against each other, you will get a very very strong relationship. Things that are significant in one will be significant in the other.</p>
+<p>If you only care about what features are important, there is very little difference between logistic and regression. Ultimately, when we are looking at the optimization, there is an xbeta term we created. It is just like in regression. Then you penalize by some magical calculation but eitherway it is all dependent on the xbeta term. In a sense, they are the same category of models.</p>
+
+</div>
+<div id="resampling" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Resampling</h2>
+<div id="up-sampling" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Up-sampling</h3>
+</div>
+<div id="bootstrapping" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Bootstrapping</h3>
+</div>
+<div id="cross-validation" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Cross Validation</h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regresssion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-model-selection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/noahlove/data-mining/edit/master/04-classification.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/noahlove/data-mining/blob/master/04-classification.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

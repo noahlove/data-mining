@@ -5,12 +5,13 @@
 From the [CORGIS data project](https://corgis-edu.github.io/corgis/) I've obtained a [music dataset](https://corgis-edu.github.io/corgis/csv/music/).
 
 ```{r}
-music <- read.csv("A:/Downloads/music_hottest_song_only.csv")
+music <- read.csv("Datasets/music_hottest_song_only.csv")
 y <- as.numeric(music$artist.terms == "hip hop")
 x <- music$song.hotttnesss
 ```
 
 ## Logistic Regression Review
+
 $Y \sim Binomial(n=1, p(X))$
 
 $p(X) = \frac{exp(X\beta)}{\exp(X\beta) + 1}$
@@ -26,6 +27,7 @@ optim(c(1, 1), logistic_obj, X=x, y=y)
 
 
 ```
+
 ```{r}
 #Wayne created in class
 my_model <- glm(y ~ x,
@@ -33,13 +35,12 @@ my_model <- glm(y ~ x,
 summary(my_model)
 ```
 
-
-
 How to run logistic regression in R?
+
 ```{r}
 train <- sample(c(TRUE, FALSE), nrow(music), replace = TRUE)
 
-#Modify the subset we are using
+
 mod <- glm(y ~ x, family = binomial(link = "logit"),
            subset = train)
 #To use the model, we pass it to the predict function. We pass in the new data
@@ -72,16 +73,15 @@ mean(same_as_data)
 
 
 ```
+
 Then we ask is the data unbalanced if you do you this for cancer in the general population for example. Could be bad if you have 96 percent accuracy
 
 We call this a classification error. The histogram should be a red flag. We are saying everything is 0, and then are just wrong when its 1. Iin this case, every song is not hip hop, and we are right 96% of the time.
 
-
-
-|       | Y = 1 | Y = 0     |
-| :---        |    :----:   |          ---: |
-| $\hat{Y}$ = 1      | A       | B   |
-|  $\hat{Y}$ = 0    | C        | D      |
+|               | Y = 1 | Y = 0 |
+|:--------------|:-----:|------:|
+| $\hat{Y}$ = 1 |   A   |     B |
+| $\hat{Y}$ = 0 |   C   |     D |
 
 $\frac{A}{A + C}$ our recall! Of all the records that are "1", how many are our model capturing
 
@@ -100,6 +100,7 @@ precision <- sum(truly1 & called1)/ sum(called1)
 recall
 precision
 ```
+
 Right now the recall is really bad: but lets make everything one and make our recall really good!
 
 ```{r}
@@ -114,7 +115,9 @@ recall
 precision
 
 ```
+
 Now lets make a sequence!
+
 ```{r}
 alphas <- seq(0,1, length.out = 10000)
 recalls <- rep(NA, length(alphas))
@@ -135,21 +138,16 @@ for(i in seq_along(alphas)){
 #plot(recalls, precisions)
 
 ```
- What are the most popular "artist.terms" in the dataset?
 
-
+What are the most popular "artist.terms" in the dataset?
 
 ```{r}
-
-head(music)
-music$artist.terms
-
 artists_sorted <- sort(table(music$artist.terms), decreasing =T)
 artists_sorted[1]
 
 ```
 
-- Choose one "artist.terms" to predict for, then try running logistic regression vs usual lm() on all of the other variables, do they pick up different variables? What would your next steps be?
+-   Choose one "artist.terms" to predict for, then try running logistic regression vs usual lm() on all of the other variables, do they pick up different variables? What would your next steps be?
 
 ```{r}
 logit <- function(x){exp(x) / (1 + exp(x))}
@@ -161,22 +159,26 @@ logistic_obj <- function(params, X, y){
 optim(c(1, 1), logistic_obj, X=x, y=y)
 ```
 
-
 Imagine you're doing fake news prediction, what metric(s) would you care more about the most? How would you recommend a target for these metrics for a company like Facebook?
 
 ```{r}
-y <- as.numeric(music$artist.terms == "blues-rock")
+artist_cols <-
+  grepl("^artist", names(music))
 
-artist_cols <- grepl("^artist", names(music))
+my_mod <-
+  glm(y ~ ., data = music[,!artist_cols])
 
-glm1 <- glm(y ~ ., family=binomial, data = music[,artist_cols])
-
-summary(glm)
-
-lm1 <- lm(y ~ ., data = music[, !artist_cols])
-
-summary(lm1)
-
+ols <-
+  lm(y ~ ., music[,!artist_cols])
 
 ```
 
+We can plot this data and see the relationship!
+
+```{r}
+plot(summary(ols)$coefficients[, 4], summary(my_mod)$coefficients[, 4])
+```
+
+If we plot the coefficients, of logistic versus regression, against each other, you will get a very very strong relationship. Things that are significant in one will be significant in the other.
+
+If you only care about what features are important, there is very little difference between logistic and regression. Ultimately, when we are looking at the optimization, there is an xbeta term we created. It is just like in regression. Then you penalize by some magical calculation but eitherway it is all dependent on the xbeta term. In a sense, they are the same category of models.
