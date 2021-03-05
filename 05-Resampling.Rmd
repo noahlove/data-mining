@@ -17,7 +17,7 @@ However, we always need to avoid overfitting. It is important to also do cross-v
 
 ![Up-sampling](A:\Documents\Semester 6\data-mining-at-columbia\My Class Notes\Images\upsampling.JPG)
 
-It works, but it is important to rememeber you aren't creating new data. You are essentially adding more weight to the already existing data. But it does help. 
+It works, but it is important to remember you aren't creating new data. You are essentially adding more weight to the already existing data. But it does help. 
 
 ### Bootstrapping
 
