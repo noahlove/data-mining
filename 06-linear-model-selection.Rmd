@@ -2,65 +2,102 @@
 
 ## Regression requires more data than features
 
-```{r packages}
+```{r}
 library(glmnet)
 ```
 
+import the dataset
+
 ```{r}
 df <- read.csv("Datasets/non_retweets_dc_inaug_steal.csv")
+```
+
+Down-sampling for faster processing
+
+```{r}
 samp_ind <- sample(nrow(df), 8000)
 df <- df[samp_ind,]
+```
+
+Combining the different flags
+
+```{r}
 steal_index <- grep("steai", names(df))
 names(df)[steal_index]
-df[, "X.stopthesteai2020"] <- 
-  (df[, "X.stopthesteai2020"] + 
-     df[, "X.stopthesteai"] + 
-     df[, "X.stopthesteai2021"])
+df[, "X.stopthesteai2020"] <- (
+  df[, "X.stopthesteai2020"] +
+    df[, "X.stopthesteai"] +
+    df[, "X.stopthesteai2021"])
 
 df <- df[, -grep("(X.stopthesteai$|X.stopthesteai2021$)", names(df))]
+```
 
-text <- df[,grep("tweet_body", names(df))]
+Removing features that are not numeric
 
-df <- df[, -grep("(tweet_body|created_at)", names(df))]
-
+```{r}
+text <- df[, grep("tweet_body", names(df))]
+df <- df[,-grep("(tweet_body|created_at)", names(df))]
 names(df)[grep("_", names(df))]
 head(df$created_at)
+df <- df[, sapply(df, class) == "numeric"]
+```
 
+Fitting the model
 
-
-
-df <- df[,sapply(df,class) == "numeric"]
-
+```{r}
 y_ind <- grep("X.stopthesteai2020", names(df))
 x <- as.matrix(df[, -y_ind])
 x <- scale(x)
 y <- as.numeric(df[, y_ind])
+#bad_data <- which(is.na(x[, colnames(x) == "xinaugur"]))
 bad_data <- which(is.na(x[, colnames(x) == "zone"]))
 x <- x[-bad_data,]
 y <- y[-bad_data]
 
+```
+
+```{r}
 
 table(sapply(df,class))
 
 names(df)[sapply(df,class) == "character"]
 
 sum(apply(x,2, function(x) mean(is.na(x) > 0)))
+```
 
+Examine the data
+
+```{r}
 head(x[,colnames(x)=="zone"])
 
 tail(x[,colnames(x)=="zone"])
 
 head(y)
+```
 
+Run the model
 
+```{r}
 ols <- lm(y ~ x)
 ols_coeffs <- summary(ols)$coefficients
+
+```
+
+To do data mining with p-values, do not treat them like probabilities, but you can use them as a metric to guide you.
+
+```{r}
 
 length(ols$coefficients)
 ```
 
 ```{r}
+p_ord <- order(ols_coeffs[, 4])
+rownames(ols_coeffs)[head(p_ord, 10)]
+```
 
+## Lasso
+
+```{r}
 
 lasso_cv <- cv.glmnet(as.matrix(df[, -y_ind]),
                       as.numeric(df[, y_ind]),
@@ -74,7 +111,6 @@ abline(v=log(lasso_cv$lambda.min),
 abline(v=log(lasso_cv$lambda.1se),
        col="green")
 ```
-
 
 ```{r}
 lasso.fits <- lasso_cv$glmnet.fit
@@ -105,8 +141,8 @@ lasso <- glmnet(as.matrix(df[, -y_ind]),
                 intercept=TRUE)
 ```
 
-
 ## simulating collinearity + sparsity
+
 ```{r}
 sample_size <- 1000
 p <- 100
@@ -214,13 +250,6 @@ abline(h=2)
 plot(lasso_cv)
 ```
 
-
-
-
-
-
-
-
 ```{r}
 sim_num <- 100
 beta_mse
@@ -251,11 +280,9 @@ boxplot(z_coeffs)
 abline(h=2)
 ```
 
-
-
 ## Principal Component Analysis
 
-Sparcity: 
+Sparcity:
 
 Inbalanced data:
 
@@ -318,6 +345,7 @@ image(cor(observ_x))
 
 
 ```
+
 ```{r}
 
 beta <- runif(hidden_p, -10, 10)
@@ -331,10 +359,11 @@ df <- data.frame(y, observ_x)
 
 
 ```
-Maybe there is a hidden gene inside of you that makes you sick. We can't (yet) measure that hidden gene. But we can measure symptoms and things like your heart rate. This should be correlated. 
 
+Maybe there is a hidden gene inside of you that makes you sick. We can't (yet) measure that hidden gene. But we can measure symptoms and things like your heart rate. This should be correlated.
 
 ## Typical machine learning approach
+
 ```{r}
 #training data set, first 800 points (80 percent)
 train <- 1:800
@@ -412,8 +441,8 @@ mean((df_w$y[-train] - pca_pred)^2)
 #that was the classic view of PCA 
 ```
 
-
 ## What we would do in data mining
+
 ```{r}
 k <- 3
 plot(pr_out$rotation[,k])
@@ -460,18 +489,13 @@ sum(pr_out$rotation[,k]^2)
 
 ```
 
-
-
-
 ## Principal Component Analysis Applied!
 
 ### Other example
-In really poor countries it is super hard to measure wealth and income. There are no reciepts and corresponding taxes. People don't have bank accounts. Instead, you measure features. Like do you have a fridge. Do you have cooking equipment? How many kids? How many room in your house? 
 
-So you could run PCA on assets matrix. You can find correlations. If you have more rooms in your house, you likely have more education. The correlations will be baked into the principal driving component. Further, they use this as the Y to see if they can predict! But that is beyond the scope of this class. 
+In really poor countries it is super hard to measure wealth and income. There are no reciepts and corresponding taxes. People don't have bank accounts. Instead, you measure features. Like do you have a fridge. Do you have cooking equipment? How many kids? How many room in your house?
 
-
-
+So you could run PCA on assets matrix. You can find correlations. If you have more rooms in your house, you likely have more education. The correlations will be baked into the principal driving component. Further, they use this as the Y to see if they can predict! But that is beyond the scope of this class.
 
 ```{r}
 library(jsonlite)
@@ -483,6 +507,7 @@ titles <- read_json("Datasets/j_cunningham_citation_titles.json")
 ```
 
 ### Explore the data
+
 ```{r}
 dim(citations)
 
@@ -503,12 +528,14 @@ names(titles)
 
 ```
 
-Papers that he has written: 
+Papers that he has written:
+
 ```{r}
 head(titles[["auth_titles"]],3)
 ```
 
 Papers he has cited
+
 ```{r}
 head(titles[["ref_titles"]],3)
 ```
@@ -534,20 +561,23 @@ Explore this data: we know the index of the two. This can show the correlation b
 ```{r}
 citations[,target_ind]
 ```
-A few things to remember. Longer papers should have more citations. There is also likely to be correlation between certain papers. 
 
-We would intuitively just want to apply our "prcomp", like we learned in last class. 
+A few things to remember. Longer papers should have more citations. There is also likely to be correlation between certain papers.
+
+We would intuitively just want to apply our "prcomp", like we learned in last class.
+
 ```{r}
 
 pr_out <- prcomp(citations)
 plot(pr_out$sdev, main="")
 ```
-This plot is not very appealing. There is not a significant drop until the last term. Maybe between 1 and 2 and 3 and 4, but not a big drop. And if you only abandon 1 dimension, (14 instead of 15), you aren't really saving a lot. 
 
+This plot is not very appealing. There is not a significant drop until the last term. Maybe between 1 and 2 and 3 and 4, but not a big drop. And if you only abandon 1 dimension, (14 instead of 15), you aren't really saving a lot.
 
 #### Try standardizing the citation matrix in different ways
 
 ##### Usual standardization, i.e. make each feature mean=0 and sd = 1
+
 ```{r}
 
 norm_citation <- apply(citations, 2 , scale)
@@ -567,14 +597,15 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
 dev.off()
 
 ```
+
 ![Plots using normal standardization](Datasets/loadings_normal_standardization.png)
 
-Remember from the plot, if we square all the values and add them together they will equal one. So strong deviations will be papers that are relied on (by index). Too many papers that share the same weight, might not be helpful. We believe there are only a few really good papers that we want. Not like 50. So this behavior is still undesirable. 
+Remember from the plot, if we square all the values and add them together they will equal one. So strong deviations will be papers that are relied on (by index). Too many papers that share the same weight, might not be helpful. We believe there are only a few really good papers that we want. Not like 50. So this behavior is still undesirable.
 
-This is bad! You subtract something away from 0 values. But we like 0s because they don't affect the objective function. PCA is using the "frebenious norm" where everything squared and added together is 1. So we like 0s. So how can we scale differently, but while keeping the 0s. 
-
+This is bad! You subtract something away from 0 values. But we like 0s because they don't affect the objective function. PCA is using the "frebenious norm" where everything squared and added together is 1. So we like 0s. So how can we scale differently, but while keeping the 0s.
 
 ##### Max normalized, i.e. make each feature min=0, max = 1
+
 ```{r}
 #lets divide by the max, then everything is between 0 and one
 norm_citation <- apply(citations, 2,
@@ -593,10 +624,11 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
 
 dev.off()
 ```
+
 This should look much nicer. For example, Eigvec 4 looks better. Why did we normalize the columns? We often do this because the columns have different units. However, in this, the columns all have the same units. Instead, papers have different lengths, so the citation number can be affected by the length of the paper. So whay do we want to actually normalize? The rows!
 
-
 ##### Max normalized per paper, i.e. make each ROW min=0, max = 1
+
 ```{r}
 citations_norm_papers <-  apply(citations, 1,
                        function(x) x / max(x))
@@ -623,9 +655,6 @@ dev.off()
 
 Ther is a much more noticable drop between 11 and 12
 
-
-
-
 ```{r}
 pr_out <- prcomp(citations)
 plot(pr_out$sdev, main="")
@@ -642,19 +671,9 @@ target_ind <- which(abs(pr_out$rotation[, 2]) > 0.15)
 titles[["ref_titles"]][target_ind]
 ```
 
-1st column second row is 
+1st column second row is
 
-2nd column 3rd row is a disaster. 
-
-
-
-
-
-
-
-
-
-
+2nd column 3rd row is a disaster.
 
 ## PCA on weather data example
 
