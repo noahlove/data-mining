@@ -1,9 +1,4 @@
----
-title: "classification"
-author: "Wayne Lee"
-date: "1/26/2021"
-output: html_document
----
+# Classification
 
 ## Music dataset
 
