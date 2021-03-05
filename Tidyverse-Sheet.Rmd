@@ -11,8 +11,6 @@ library(tidyverse)
 ```{r}
 head(storms)
 
-
-
 ```
 
 You can use (data source, columns)
@@ -29,27 +27,17 @@ dplyr::select(storms, -name)
 
 ### Other select functions:
 
-+-------------------+----------------------------------------------------------+
-| Function call     | Description                                              |
-+===================+==========================================================+
-| \-                | select everything but                                    |
-+-------------------+----------------------------------------------------------+
-| :                 | select range                                             |
-+-------------------+----------------------------------------------------------+
-| contains()        | Select columns whose name contains a character string    |
-+-------------------+----------------------------------------------------------+
-| ends_with()       | Select columns whose name ends with a string             |
-+-------------------+----------------------------------------------------------+
-| everything()      | Select every column                                      |
-+-------------------+----------------------------------------------------------+
-| matches()         | Select columns who name matches a regular expression     |
-+-------------------+----------------------------------------------------------+
-| num_range()       | Select columns named x1,x2,x3...                         |
-+-------------------+----------------------------------------------------------+
-| one_of()          | Select columns whose names are in a group of names       |
-+-------------------+----------------------------------------------------------+
-| starts_with()     | Select columns whose name starts with a character string |
-+-------------------+----------------------------------------------------------+
+| Function call | Description                                              |
+|---------------|----------------------------------------------------------|
+| \-            | select everything but                                    |
+| :             | select range                                             |
+| contains()    | Select columns whose name contains a character string    |
+| ends_with()   | Select columns whose name ends with a string             |
+| everything()  | Select every column                                      |
+| matches()     | Select columns who name matches a regular expression     |
+| num_range()   | Select columns named x1,x2,x3...                         |
+| one_of()      | Select columns whose names are in a group of names       |
+| starts_with() | Select columns whose name starts with a character string |
 
 : Other useful selection function
 
@@ -66,27 +54,17 @@ dplyr::filter(storms, wind >= 50,
 
 The columns on the right show Boolean operator, these combine 2 or more logical tests into a single one, so you get true or false. The columns on the left actually do logical operations.
 
-+--------------+-----------------------+------------------+----------------+
-| Logical Test | ?Comparison           | Boolean Operator | ?base::Logic   |
-+==============+=======================+==================+================+
-| \<           |                       | &                | boolean and    |
-+--------------+-----------------------+------------------+----------------+
-| \>           | Greater than          | \|               | boolean or     |
-+--------------+-----------------------+------------------+----------------+
-| ==           | Equal to              | xor              | exactly or     |
-+--------------+-----------------------+------------------+----------------+
-| \<=          | Less than or equal    | !                | not            |
-+--------------+-----------------------+------------------+----------------+
-| \>=          | Greater than or equal | any              | any true       |
-+--------------+-----------------------+------------------+----------------+
-| %in%         | Group membership      | all              | all true       |
-+--------------+-----------------------+------------------+----------------+
-| !=           | Not equal             |                  |                |
-+--------------+-----------------------+------------------+----------------+
-| is.na        | is NA                 |                  |                |
-+--------------+-----------------------+------------------+----------------+
-| !is.na       | Is not NA             |                  |                |
-+--------------+-----------------------+------------------+----------------+
+| Logical Test | ?Comparison           | Boolean Operator | ?base::Logic |
+|--------------|-----------------------|------------------|--------------|
+| \<           |                       | &                | boolean and  |
+| \>           | Greater than          | \|               | boolean or   |
+| ==           | Equal to              | xor              | exactly or   |
+| \<=          | Less than or equal    | !                | not          |
+| \>=          | Greater than or equal | any              | any true     |
+| %in%         | Group membership      | all              | all true     |
+| !=           | Not equal             |                  |              |
+| is.na        | is NA                 |                  |              |
+| !is.na       | Is not NA             |                  |              |
 
 : Logical tests in R
 
@@ -112,29 +90,18 @@ One thing to note: mutate doesn't affect the original data frame. It simply retu
 
 ### Useful mutate functions:
 
-+--------------------------------------------------------+--------------------------------------------+
-| Function                                               | Description                                |
-+========================================================+============================================+
-| pmin(), pmax()                                         | Element wise min and max                   |
-+--------------------------------------------------------+--------------------------------------------+
-| cummin(), cummax()                                     | cumulative min and max                     |
-+--------------------------------------------------------+--------------------------------------------+
-| cumsum(), cumprod()                                    | Cumulative sum and product                 |
-+--------------------------------------------------------+--------------------------------------------+
-| between()                                              | Are values between a and b?                |
-+--------------------------------------------------------+--------------------------------------------+
-| cume_dist()                                            | Cumulative distribution of values          |
-+--------------------------------------------------------+--------------------------------------------+
-| cumall(), cumany()                                     | Cumulative all and any                     |
-+--------------------------------------------------------+--------------------------------------------+
-| cummean()                                              | Cumulative mean                            |
-+--------------------------------------------------------+--------------------------------------------+
-| lead(), lag()                                          | Copy with values one position              |
-+--------------------------------------------------------+--------------------------------------------+
-| ntile()                                                | Bin vector into n buckets                  |
-+--------------------------------------------------------+--------------------------------------------+
-| dense_rank(), min_rank(), percent_rank(), row_number() | Various ranking methods                    |
-+--------------------------------------------------------+--------------------------------------------+
+| Function                                               | Description                       |
+|--------------------------------------------------------|-----------------------------------|
+| pmin(), pmax()                                         | Element wise min and max          |
+| cummin(), cummax()                                     | cumulative min and max            |
+| cumsum(), cumprod()                                    | Cumulative sum and product        |
+| between()                                              | Are values between a and b?       |
+| cume_dist()                                            | Cumulative distribution of values |
+| cumall(), cumany()                                     | Cumulative all and any            |
+| cummean()                                              | Cumulative mean                   |
+| lead(), lag()                                          | Copy with values one position     |
+| ntile()                                                | Bin vector into n buckets         |
+| dense_rank(), min_rank(), percent_rank(), row_number() | Various ranking methods           |
 
 ## Summarise / Summarize
 
@@ -149,28 +116,60 @@ Works very similar to mutate.
 
 ### Useful summary functions
 
-+------------------+---------------------------------------------------+
-| Function         | Description                                       |
-+==================+===================================================+
-| min(), max()     | Minimum and maximum values                        |
-+------------------+---------------------------------------------------+
-| mean()           | Mean value                                        |
-+------------------+---------------------------------------------------+
-| median()         | Median Value                                      |
-+------------------+---------------------------------------------------+
-| sum()            | Sum of values                                     |
-+------------------+---------------------------------------------------+
-| var, sd()        | Variance and standard deviation of a vector       |
-+------------------+---------------------------------------------------+
-| first()          | First value in a vector                           |
-+------------------+---------------------------------------------------+
-| last()           | Last value in a vector                            |
-+------------------+---------------------------------------------------+
-| nth              | Nth value in a vector                             |
-+------------------+---------------------------------------------------+
-| n()              | The number of values in a vector                  |
-+------------------+---------------------------------------------------+
-| n_distinct()     | The number of distinct values in a vector         |
-+------------------+---------------------------------------------------+
+| Function     | Description                                 |
+|--------------|---------------------------------------------|
+| min(), max() | Minimum and maximum values                  |
+| mean()       | Mean value                                  |
+| median()     | Median Value                                |
+| sum()        | Sum of values                               |
+| var, sd()    | Variance and standard deviation of a vector |
+| first()      | First value in a vector                     |
+| last()       | Last value in a vector                      |
+| nth          | Nth value in a vector                       |
+| n()          | The number of values in a vector            |
+| n_distinct() | The number of distinct values in a vector   |
 
 : Useful summary functions, top 5 are specific to dplyr
+
+## Arrange()
+
+This doesn't add or subtract from your data, but helps you organize your rows!
+
+```{r}
+storms %>% 
+  arrange(desc(wind)) %>% 
+  select(name, wind, pressure, year)
+```
+
+This way, ties are just ordered in the way they originally appeared in the dataframe. Alternatively, you can give a second column to sort by to break those ties, such as by year:
+
+```{r}
+storms %>% 
+  arrange(desc(wind), desc(year)) %>% 
+  select(name, wind, pressure, year)
+```
+
+## Group_by()
+
+A very powerful function to get summary statistics from just certain groups. Say we want to see median wind speed based on year for example:
+
+```{r}
+storms %>% 
+  group_by(year) %>% 
+  summarize(median = median(pressure), variance = var(pressure), n = n())
+```
+
+We can save that in a in data frame and graph it too!
+
+```{r}
+storms_graph <- storms %>% 
+  group_by(year) %>% 
+  summarize(median = median(pressure), variance = var(pressure), n = n())
+
+ggplot(data = storms_graph, mapping = aes(x = year, y = median)) + 
+  geom_point() + 
+  geom_smooth() + 
+  labs(title = "Median wind speed of storms by year")
+```
+
+You can also group by multiple things, just add a comma!
