@@ -5,8 +5,7 @@ different regression models.
 
 Context: the US is increasingly polarized and [Twitter](https://twitter.com/home), a social
 media platform, is providing the space for people to voice their opinions or find like-minded
-individuals. In this assignment, we will use Twitter data `non_retweets_dc_inaug_steal.csv` on CourseWorks
-that has contains the token frequencies. This has been processed somewhat to minimize the data size. 
+individuals. In this assignment, we will use Twitter data `non_retweets_dc_inaug_steal.csv` on CourseWorks that has contains the token frequencies. This has been processed somewhat to minimize the data size. 
 The non-token variables are `created_at`, `like_count`, `reply_count`, `retweet_count`, `tweet_body`.
 
 Please **re-download** this dataset given there were issues with the version given in class.
@@ -78,8 +77,7 @@ hint, adding some print statements can help with unnecessary panics:
 
 Side comment:
 - You may want to see how the `lambda.1se` compares.
-- (personal observation) Normalizing the features does help with the optimization but our features are
-  all token frequencies so it's not as big of a concern.
+- (personal observation) Normalizing the features does help with the optimization but our features are all token frequencies so it's not as big of a concern.
 
 ## Question 3
 For the algorithm that performed the best, please retrain the model with the following requirements:
