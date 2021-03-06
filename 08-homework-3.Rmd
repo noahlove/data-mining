@@ -1,21 +1,105 @@
 # Homework 3 Project
 
 ```{r}
+library(MASS)
+library(caret)
+
+library(broom)
 library(caret)
 library(tidyverse)
 ```
 
 
-```{r include=FALSE}
-tweets_raw <- read_csv("Datasets/non_retweets_dc_inaug_steal.csv")
-dim(tweets_raw)
+```{r message=FALSE, warning=FALSE, include=FALSE}
+tweets <- read_csv("Datasets/non_retweets_dc_inaug_steal.csv") %>% 
+  drop_na()
+
 ```
 
+## Question 0
+
+Let's first see when these tweets were created:
+
+```{r echo=FALSE}
+ggplot(data = tweets, mapping = aes(x = created_at))+
+  geom_histogram(fill = "steelblue", color = "black", bins = 23) + 
+  theme_light() + 
+  labs(title = "Twitter data pull by date", x = "Tweet Created On", y = "Count")
+
+min(tweets$created_at)
+max(tweets$created_at)
+```
+
+## Question 1
+
+
+```{r eval=FALSE, include=FALSE}
+# Mini sample
+
+# no longer works with no daaframe
+sample_df <- tweets %>% 
+  select(trump, elect, inaugur, `hasinauguration2021`, `#inaugurationday`)
+
+sample_df
+
+tweets_condensed <- sample_df %>% 
+  mutate(total = rowSums(select(., contains('inaug')))) %>% 
+  select(-contains('inaug')) %>% 
+  rename(inaug = total)
+
+tweets_condensed
+```
 
 ```{r}
-#clean code
-tweets <- as_tibble(tweets_raw)
+text <- df[, grep("tweet_body", names(tweets))]
 
-tweets_raw
+df <- tweets %>% 
+  dplyr::mutate(total = rowSums(dplyr::select(., contains('inaug')))) %>% 
+  dplyr::select(-contains('inaug')) %>% 
+  rename(inaug = total) %>% 
+  dplyr::select(-created_at, -like_count, -reply_count, -retweet_count, -tweet_body)
+
+mean(df$inaug)
 ```
+This condensed seven columns and showed that 46.2% of the dataset's tweets contain the string "inaug."
+
+
+## Question 2
+
+### Cross-validated OLS
+
+```{r eval=FALSE, include=FALSE}
+#test if it works
+ols = lm(inaug ~ ., data = df)
+summary(ols)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+train_control <- trainControl(method  = "cv", number = 5)
+grid <- expand.grid(.fL = c(0), .usekernel = c(FALSE))
+
+model_ols <- train(inaug ~ .,
+                     data = df,
+                     method = "lm",           # method
+                     na.action = na.pass,     # pass missing
+                     trControl = train_control)        # cross validation
+
+model_caret
+
+```
+
+```{r}
+model_stepwise <- train(inaug ~ .,
+                        data = df,
+                        method = "glmStepAIC", 
+                        trControl = train_control)
+```
+
+
+Stepwise regression using AIC as the objective
+
+
+
+
 
