@@ -98,9 +98,8 @@ rownames(ols_coeffs)[head(p_ord, 10)]
 ## Lasso
 
 ```{r}
-
-lasso_cv <- cv.glmnet(as.matrix(df[, -y_ind]),
-                      as.numeric(df[, y_ind]),
+lasso_cv <- cv.glmnet(x,
+                      y,
                       alpha=1,
                       nfolds = 5,
                       intercept=TRUE)
@@ -116,29 +115,25 @@ abline(v=log(lasso_cv$lambda.1se),
 lasso.fits <- lasso_cv$glmnet.fit
 lasso_cv$lambda[which.min(lasso_cv$cvm)]
 lasso_cv$lambda.min
-names(lasso_cv)
 lambda_ind <- which.min(lasso_cv$cvm)
-plot(ols$coefficients[-1],
-     lasso_cv$glmnet.fit$beta[, lambda_ind], 
-     xlab="OLS Coeffs", ylab="LASSO Coeffs")
-dim(lasso_cv$glmnet.fit$beta)
-abline(h=0)
-abline(a=0,b=1)
+plot(
+  ols$coefficients[-1],
+  lasso_cv$glmnet.fit$beta[, lambda_ind],
+  xlab = "OLS Coeffs",
+  ylab = "LASSO Coeffs",
+  xlim = c(-.1, 0.1),
+  ylim = c(-.05, 0.05)
+)
+abline(h = 0)
+abline(a = 0, b = 1)
 ```
 
 ```{r}
 lasso_coeffs <- lasso_cv$glmnet.fit$beta[, lambda_ind]
-lasso_coeffs[abs(lasso_coeffs) > 0.5]
+lasso_coeffs[abs(lasso_coeffs) > 0.05]
 
 hist(lasso_cv$glmnet.fit$beta[, lambda_ind])
 
-
-```
-
-```{r}
-lasso <- glmnet(as.matrix(df[, -y_ind]),
-                df[, y_ind], lambda=lasso_cv$lambda.1se,
-                intercept=TRUE)
 ```
 
 ## simulating collinearity + sparsity
@@ -200,8 +195,6 @@ coef(lasso_mod)
 ```
 
 ```{r}
-
-
 sample_size <- 1000
 p <- 100
 useful_p <- 50
@@ -252,7 +245,7 @@ plot(lasso_cv)
 
 ```{r}
 sim_num <- 100
-beta_mse
+
 z_coeffs <- matrix(NA, ncol=3, nrow=sim_num)
 for(i in seq_len(sim_num)){
   if(i %% 10 == 0){
@@ -276,8 +269,8 @@ for(i in seq_len(sim_num)){
 }
 
 
-boxplot(z_coeffs)
-abline(h=2)
+#boxplot(z_coeffs)
+#abline(h=2)
 ```
 
 ## Principal Component Analysis
@@ -356,7 +349,6 @@ y <- hidden_z %*% beta + noise
 df <- data.frame(y, observ_x)
 
 #y depends on the hidden stuff not x
-
 
 ```
 
@@ -523,9 +515,6 @@ apply(citations, 1, max)
 ```{r}
 names(titles)
 
-
-
-
 ```
 
 Papers that he has written:
@@ -567,7 +556,6 @@ A few things to remember. Longer papers should have more citations. There is als
 We would intuitively just want to apply our "prcomp", like we learned in last class.
 
 ```{r}
-
 pr_out <- prcomp(citations)
 plot(pr_out$sdev, main="")
 ```
@@ -579,7 +567,6 @@ This plot is not very appealing. There is not a significant drop until the last 
 ##### Usual standardization, i.e. make each feature mean=0 and sd = 1
 
 ```{r}
-
 norm_citation <- apply(citations, 2 , scale)
 #also
 
@@ -622,7 +609,7 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     abline(h=0)
 }
 
-dev.off()
+#dev.off()
 ```
 
 This should look much nicer. For example, Eigvec 4 looks better. Why did we normalize the columns? We often do this because the columns have different units. However, in this, the columns all have the same units. Instead, papers have different lengths, so the citation number can be affected by the length of the paper. So whay do we want to actually normalize? The rows!
@@ -649,7 +636,7 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     plot(eigenvec)
     abline(h=0)
 }
-dev.off()
+#dev.off()
 
 ```
 
@@ -665,7 +652,7 @@ for(i in seq_len(ncol(pr_out$rotation[,1:12]))){
     plot(eigenvec)
     abline(h=0)
 }
-dev.off()
+#dev.off()
 
 target_ind <- which(abs(pr_out$rotation[, 2]) > 0.15)
 titles[["ref_titles"]][target_ind]
@@ -713,7 +700,7 @@ for(i in 1:2){
          legend = levels(col_factors),
          fill=cols)
 }
-dev.off()
+#dev.off()
 
 ```
 
@@ -760,7 +747,7 @@ for(i in 1:2){
          legend = levels(col_factors),
          fill=cols)
 }
-dev.off()
+#dev.off()
 
 ```
 
@@ -793,7 +780,7 @@ for(i in 1:2){
          legend = levels(col_factors),
          fill=cols)
 }
-dev.off()
+#dev.off()
 
 ```
 
@@ -835,7 +822,7 @@ station_new <- station %>%
   
 
 station_new
-
+ 
 #closest <- which(min(station$longitude + station$latitude))
 
 

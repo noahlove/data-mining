@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Tidyverse tools | Data Mining</title>
-  <meta name="description" content="Chapter 7 Tidyverse tools | Data Mining" />
+  <title>Chapter 2 Tidyverse tools | HW1</title>
+  <meta name="description" content="Chapter 2 Tidyverse tools | HW1" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Tidyverse tools | Data Mining" />
+  <meta property="og:title" content="Chapter 2 Tidyverse tools | HW1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Tidyverse tools | Data Mining" />
+  <meta name="twitter:title" content="Chapter 2 Tidyverse tools | HW1" />
   
   
   
@@ -24,15 +24,14 @@
 <meta name="author" content="Noah Love" />
 
 
-<meta name="date" content="2021-03-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="comparing-different-models.html"/>
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="linear-regresssion.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -135,27 +134,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A Brief Introduction</a></li>
-<li class="chapter" data-level="2" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>2</b> A caucus-race and a long tale</a></li>
-<li class="chapter" data-level="3" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>3</b> Principal Component Analysis</a>
+<li class="chapter" data-level="2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html"><i class="fa fa-check"></i><b>2</b> Tidyverse tools</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#principle-component-analysis"><i class="fa fa-check"></i><b>3.1</b> Principle Component Analysis</a></li>
-<li class="chapter" data-level="3.2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#typical-machine-learning-approach"><i class="fa fa-check"></i><b>3.2</b> Typical machine learning approach</a></li>
-<li class="chapter" data-level="3.3" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#what-we-would-do-in-data-mining"><i class="fa fa-check"></i><b>3.3</b> What we would do in data mining</a></li>
+<li class="chapter" data-level="2.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#select"><i class="fa fa-check"></i><b>2.1</b> Select</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#original-data-set"><i class="fa fa-check"></i><b>2.1.1</b> Original Data Set</a></li>
+<li class="chapter" data-level="2.1.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#other-select-functions"><i class="fa fa-check"></i><b>2.1.2</b> Other select functions:</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html"><i class="fa fa-check"></i><b>4</b> Principal Component Analysis Applied!</a>
+<li class="chapter" data-level="2.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#filter"><i class="fa fa-check"></i><b>2.2</b> Filter</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html#citation-data"><i class="fa fa-check"></i><b>4.1</b> Citation data</a>
+<li class="chapter" data-level="2.2.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#logical-tests-in-r"><i class="fa fa-check"></i><b>2.2.1</b> Logical Tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#mutate"><i class="fa fa-check"></i><b>2.3</b> Mutate</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html#other-example"><i class="fa fa-check"></i><b>4.1.1</b> Other example</a></li>
-<li class="chapter" data-level="4.1.2" data-path="principal-component-analysis-applied.html"><a href="principal-component-analysis-applied.html#fishing-out-various-titles"><i class="fa fa-check"></i><b>4.1.2</b> Fishing out various titles</a></li>
+<li class="chapter" data-level="2.3.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-mutate-functions"><i class="fa fa-check"></i><b>2.3.1</b> Useful mutate functions:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#summarise-summarize"><i class="fa fa-check"></i><b>2.4</b> Summarise / Summarize</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-summary-functions"><i class="fa fa-check"></i><b>2.4.1</b> Useful summary functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#arrange"><i class="fa fa-check"></i><b>2.5</b> Arrange()</a></li>
+<li class="chapter" data-level="2.6" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#group_by"><i class="fa fa-check"></i><b>2.6</b> Group_by()</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regresssion.html"><a href="linear-regresssion.html"><i class="fa fa-check"></i><b>3</b> Linear Regresssion</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#non-linear-data"><i class="fa fa-check"></i><b>3.1</b> Non linear data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#interactions-subtracting-variables"><i class="fa fa-check"></i><b>3.1.1</b> Interactions + subtracting variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regresssion.html"><a href="linear-regresssion.html#last-trap-ording-of-the-data"><i class="fa fa-check"></i><b>3.2</b> Last trap, ording of the data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regresssion.html"><a href="linear-regresssion.html#missing"><i class="fa fa-check"></i><b>3.2.1</b> Missing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regresssion.html"><a href="linear-regresssion.html#glm"><i class="fa fa-check"></i><b>3.2.2</b> GLM</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="pca-on-weather-data-example.html"><a href="pca-on-weather-data-example.html"><i class="fa fa-check"></i><b>5</b> PCA on weather data example</a>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="pca-on-weather-data-example.html"><a href="pca-on-weather-data-example.html#different-noramlizations"><i class="fa fa-check"></i><b>5.1</b> Different noramlizations</a>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#music-dataset"><i class="fa fa-check"></i><b>4.1</b> Music dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#logistic-regression-review"><i class="fa fa-check"></i><b>4.2</b> Logistic Regression Review</a></li>
+<li class="chapter" data-level="4.3" data-path="classification.html"><a href="classification.html#resampling"><i class="fa fa-check"></i><b>4.3</b> Resampling</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="pca-on-weather-data-example.html"><a href="pca-on-weather-data-example.html#no-normalization"><i class="fa fa-check"></i><b>5.1.1</b> No normalization</a></li>
-<li class="chapter" data-level="5.1.2" data-path="pca-on-weather-data-example.html"><a href="pca-on-weather-data-example.html#centering-and-scaling"><i class="fa fa-check"></i><b>5.1.2</b> Centering and scaling</a></li>
+<li class="chapter" data-level="4.3.1" data-path="classification.html"><a href="classification.html#up-sampling"><i class="fa fa-check"></i><b>4.3.1</b> Up-sampling</a></li>
+<li class="chapter" data-level="4.3.2" data-path="classification.html"><a href="classification.html#bootstrapping"><i class="fa fa-check"></i><b>4.3.2</b> Bootstrapping</a></li>
+<li class="chapter" data-level="4.3.3" data-path="classification.html"><a href="classification.html#cross-validation"><i class="fa fa-check"></i><b>4.3.3</b> Cross Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="classification.html"><a href="classification.html#initial-work"><i class="fa fa-check"></i><b>4.4</b> Initial Work</a></li>
+<li class="chapter" data-level="4.5" data-path="classification.html"><a href="classification.html#a-basic-model-with-upsampling"><i class="fa fa-check"></i><b>4.5</b> A basic model with upsampling</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-model-selection.html"><a href="linear-model-selection.html"><i class="fa fa-check"></i><b>5</b> Linear Model Selection</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#regression-requires-more-data-than-features"><i class="fa fa-check"></i><b>5.1</b> Regression requires more data than features</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#lasso"><i class="fa fa-check"></i><b>5.2</b> Lasso</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-model-selection.html"><a href="linear-model-selection.html#simulating-collinearity-sparsity"><i class="fa fa-check"></i><b>5.3</b> simulating collinearity + sparsity</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-model-selection.html"><a href="linear-model-selection.html#demo-on-glmnet-functionalities"><i class="fa fa-check"></i><b>5.4</b> Demo on glmnet functionalities</a></li>
+<li class="chapter" data-level="5.5" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principal-component-analysis"><i class="fa fa-check"></i><b>5.5</b> Principal Component Analysis</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principle-component-analysis"><i class="fa fa-check"></i><b>5.5.1</b> Principle Component Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="linear-model-selection.html"><a href="linear-model-selection.html#typical-machine-learning-approach"><i class="fa fa-check"></i><b>5.6</b> Typical machine learning approach</a></li>
+<li class="chapter" data-level="5.7" data-path="linear-model-selection.html"><a href="linear-model-selection.html#what-we-would-do-in-data-mining"><i class="fa fa-check"></i><b>5.7</b> What we would do in data mining</a></li>
+<li class="chapter" data-level="5.8" data-path="linear-model-selection.html"><a href="linear-model-selection.html#principal-component-analysis-applied"><i class="fa fa-check"></i><b>5.8</b> Principal Component Analysis Applied!</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#other-example"><i class="fa fa-check"></i><b>5.8.1</b> Other example</a></li>
+<li class="chapter" data-level="5.8.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#explore-the-data"><i class="fa fa-check"></i><b>5.8.2</b> Explore the data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="linear-model-selection.html"><a href="linear-model-selection.html#pca-on-weather-data-example"><i class="fa fa-check"></i><b>5.9</b> PCA on weather data example</a></li>
+<li class="chapter" data-level="5.10" data-path="linear-model-selection.html"><a href="linear-model-selection.html#different-noramlizations"><i class="fa fa-check"></i><b>5.10</b> Different noramlizations</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="linear-model-selection.html"><a href="linear-model-selection.html#no-normalization"><i class="fa fa-check"></i><b>5.10.1</b> No normalization</a></li>
+<li class="chapter" data-level="5.10.2" data-path="linear-model-selection.html"><a href="linear-model-selection.html#centering-and-scaling"><i class="fa fa-check"></i><b>5.10.2</b> Centering and scaling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="comparing-different-models.html"><a href="comparing-different-models.html"><i class="fa fa-check"></i><b>6</b> Comparing different models</a>
@@ -168,27 +215,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-5"><i class="fa fa-check"></i><b>6.6</b> Question 5</a></li>
 <li class="chapter" data-level="6.7" data-path="comparing-different-models.html"><a href="comparing-different-models.html#question-6"><i class="fa fa-check"></i><b>6.7</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html"><i class="fa fa-check"></i><b>7</b> Tidyverse tools</a>
+<li class="chapter" data-level="7" data-path="homework-3-project.html"><a href="homework-3-project.html"><i class="fa fa-check"></i><b>7</b> Homework 3 Project</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#select"><i class="fa fa-check"></i><b>7.1</b> Select</a>
+<li class="chapter" data-level="7.1" data-path="homework-3-project.html"><a href="homework-3-project.html#hw1"><i class="fa fa-check"></i><b>7.1</b> HW1</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#original-data-set"><i class="fa fa-check"></i><b>7.1.1</b> Original Data Set</a></li>
-<li class="chapter" data-level="7.1.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#other-select-functions"><i class="fa fa-check"></i><b>7.1.2</b> Other select functions:</a></li>
+<li class="chapter" data-level="7.1.1" data-path="homework-3-project.html"><a href="homework-3-project.html#q1"><i class="fa fa-check"></i><b>7.1.1</b> Q1</a></li>
+<li class="chapter" data-level="7.1.2" data-path="homework-3-project.html"><a href="homework-3-project.html#q2"><i class="fa fa-check"></i><b>7.1.2</b> Q2</a></li>
+<li class="chapter" data-level="7.1.3" data-path="homework-3-project.html"><a href="homework-3-project.html#q3"><i class="fa fa-check"></i><b>7.1.3</b> Q3</a></li>
+<li class="chapter" data-level="7.1.4" data-path="homework-3-project.html"><a href="homework-3-project.html#q4"><i class="fa fa-check"></i><b>7.1.4</b> Q4</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#filter"><i class="fa fa-check"></i><b>7.2</b> Filter</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#logical-tests-in-r"><i class="fa fa-check"></i><b>7.2.1</b> Logical Tests in R</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#mutate"><i class="fa fa-check"></i><b>7.3</b> Mutate</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-mutate-functions"><i class="fa fa-check"></i><b>7.3.1</b> Useful mutate functions:</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#summarise-summarize"><i class="fa fa-check"></i><b>7.4</b> Summarise / Summarize</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#useful-summary-functions"><i class="fa fa-check"></i><b>7.4.1</b> Useful summary functions</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#arrange"><i class="fa fa-check"></i><b>7.5</b> Arrange()</a></li>
-<li class="chapter" data-level="7.6" data-path="tidyverse-tools.html"><a href="tidyverse-tools.html#group_by"><i class="fa fa-check"></i><b>7.6</b> Group_by()</a></li>
+<li class="chapter" data-level="7.2" data-path="homework-3-project.html"><a href="homework-3-project.html#r-markdown"><i class="fa fa-check"></i><b>7.2</b> R Markdown</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -201,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Mining</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HW1</a>
           </h1>
         </div>
 
@@ -209,29 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tidyverse-tools" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Tidyverse tools</h1>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="tidyverse-tools.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div id="select" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Select</h2>
-<div id="original-data-set" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Original Data Set</h3>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="tidyverse-tools.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(storms)</span></code></pre></div>
+<div id="tidyverse-tools" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Tidyverse tools</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="tidyverse-tools.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div id="select" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Select</h2>
+<div id="original-data-set" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Original Data Set</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="tidyverse-tools.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(storms)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 13
-##   name   year month   day  hour   lat  long
-##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Amy    1975     6    27     0  27.5 -79  
-## 2 Amy    1975     6    27     6  28.5 -79  
-## 3 Amy    1975     6    27    12  29.5 -79  
-## 4 Amy    1975     6    27    18  30.5 -79  
-## 5 Amy    1975     6    28     0  31.5 -78.8
-## 6 Amy    1975     6    28     6  32.4 -78.7
-## # … with 6 more variables: status &lt;chr&gt;,
-## #   category &lt;ord&gt;, wind &lt;int&gt;,
-## #   pressure &lt;int&gt;, ts_diameter &lt;dbl&gt;,
-## #   hu_diameter &lt;dbl&gt;</code></pre>
+##   name   year month   day  hour   lat  long status category  wind pressure
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;ord&gt;    &lt;int&gt;    &lt;int&gt;
+## 1 Amy    1975     6    27     0  27.5 -79   tropi… -1          25     1013
+## 2 Amy    1975     6    27     6  28.5 -79   tropi… -1          25     1013
+## 3 Amy    1975     6    27    12  29.5 -79   tropi… -1          25     1013
+## 4 Amy    1975     6    27    18  30.5 -79   tropi… -1          25     1013
+## 5 Amy    1975     6    28     0  31.5 -78.8 tropi… -1          25     1012
+## 6 Amy    1975     6    28     6  32.4 -78.7 tropi… -1          25     1012
+## # … with 2 more variables: ts_diameter &lt;dbl&gt;, hu_diameter &lt;dbl&gt;</code></pre>
 <p>You can use (data source, columns)</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="tidyverse-tools.html#cb92-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(storms, name, pressure)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tidyverse-tools.html#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(storms, name, pressure)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 2
 ##    name  pressure
 ##    &lt;chr&gt;    &lt;int&gt;
@@ -247,27 +280,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Amy       1002
 ## # … with 10,000 more rows</code></pre>
 <p>We can also do (data source, -columns) to choose all but that column, i.e.:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="tidyverse-tools.html#cb94-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(storms, <span class="sc">-</span>name)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tidyverse-tools.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(storms, <span class="sc">-</span>name)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 12
-##     year month   day  hour   lat  long status
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-##  1  1975     6    27     0  27.5 -79   tropi…
-##  2  1975     6    27     6  28.5 -79   tropi…
-##  3  1975     6    27    12  29.5 -79   tropi…
-##  4  1975     6    27    18  30.5 -79   tropi…
-##  5  1975     6    28     0  31.5 -78.8 tropi…
-##  6  1975     6    28     6  32.4 -78.7 tropi…
-##  7  1975     6    28    12  33.3 -78   tropi…
-##  8  1975     6    28    18  34   -77   tropi…
-##  9  1975     6    29     0  34.4 -75.8 tropi…
-## 10  1975     6    29     6  34   -74.8 tropi…
-## # … with 10,000 more rows, and 5 more
-## #   variables: category &lt;ord&gt;, wind &lt;int&gt;,
-## #   pressure &lt;int&gt;, ts_diameter &lt;dbl&gt;,
+##     year month   day  hour   lat  long status category  wind pressure
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;ord&gt;    &lt;int&gt;    &lt;int&gt;
+##  1  1975     6    27     0  27.5 -79   tropi… -1          25     1013
+##  2  1975     6    27     6  28.5 -79   tropi… -1          25     1013
+##  3  1975     6    27    12  29.5 -79   tropi… -1          25     1013
+##  4  1975     6    27    18  30.5 -79   tropi… -1          25     1013
+##  5  1975     6    28     0  31.5 -78.8 tropi… -1          25     1012
+##  6  1975     6    28     6  32.4 -78.7 tropi… -1          25     1012
+##  7  1975     6    28    12  33.3 -78   tropi… -1          25     1011
+##  8  1975     6    28    18  34   -77   tropi… -1          30     1006
+##  9  1975     6    29     0  34.4 -75.8 tropi… 0           35     1004
+## 10  1975     6    29     6  34   -74.8 tropi… 0           40     1002
+## # … with 10,000 more rows, and 2 more variables: ts_diameter &lt;dbl&gt;,
 ## #   hu_diameter &lt;dbl&gt;</code></pre>
 </div>
-<div id="other-select-functions" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Other select functions:</h3>
+<div id="other-select-functions" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Other select functions:</h3>
 <table>
 <caption>Other useful selection function</caption>
 <thead>
@@ -317,30 +348,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div id="filter" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Filter</h2>
+<div id="filter" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Filter</h2>
 <p>This will apply a test to every row in the data frame and return just the rows that pass the test. You can combine by putting a comma in the state. It acts as AND.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tidyverse-tools.html#cb96-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(storms, wind <span class="sc">&gt;=</span> <span class="dv">50</span>,</span>
-<span id="cb96-2"><a href="tidyverse-tools.html#cb96-2" aria-hidden="true" tabindex="-1"></a>              name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;alberto&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;allison&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tidyverse-tools.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(storms, wind <span class="sc">&gt;=</span> <span class="dv">50</span>,</span>
+<span id="cb8-2"><a href="tidyverse-tools.html#cb8-2" aria-hidden="true" tabindex="-1"></a>              name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;alberto&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;allison&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 35 x 13
-##    name   year month   day  hour   lat  long
-##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Alex   2004     8     2    12  31.3 -79  
-##  2 Alex   2004     8     2    18  31.8 -78.7
-##  3 Alex   2004     8     3     0  32.4 -78.2
-##  4 Alex   2004     8     3     6  33   -77.4
-##  5 Alex   2004     8     3    12  34.2 -76.4
-##  6 Alex   2004     8     3    18  35.3 -75.2
-##  7 Alex   2004     8     4     0  36   -73.7
-##  8 Alex   2004     8     4     6  36.8 -72.1
-##  9 Alex   2004     8     4    12  37.3 -70.2
-## 10 Alex   2004     8     4    18  37.8 -68.3
-## # … with 25 more rows, and 6 more variables:
-## #   status &lt;chr&gt;, category &lt;ord&gt;,
-## #   wind &lt;int&gt;, pressure &lt;int&gt;,
+##    name   year month   day  hour   lat  long status category  wind
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;ord&gt;    &lt;int&gt;
+##  1 Alex   2004     8     2    12  31.3 -79   tropi… 0           50
+##  2 Alex   2004     8     2    18  31.8 -78.7 tropi… 0           50
+##  3 Alex   2004     8     3     0  32.4 -78.2 tropi… 0           60
+##  4 Alex   2004     8     3     6  33   -77.4 hurri… 1           70
+##  5 Alex   2004     8     3    12  34.2 -76.4 hurri… 2           85
+##  6 Alex   2004     8     3    18  35.3 -75.2 hurri… 2           85
+##  7 Alex   2004     8     4     0  36   -73.7 hurri… 1           80
+##  8 Alex   2004     8     4     6  36.8 -72.1 hurri… 1           80
+##  9 Alex   2004     8     4    12  37.3 -70.2 hurri… 2           85
+## 10 Alex   2004     8     4    18  37.8 -68.3 hurri… 2           95
+## # … with 25 more rows, and 3 more variables: pressure &lt;int&gt;,
 ## #   ts_diameter &lt;dbl&gt;, hu_diameter &lt;dbl&gt;</code></pre>
-<div id="logical-tests-in-r" class="section level3" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Logical Tests in R</h3>
+<div id="logical-tests-in-r" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Logical Tests in R</h3>
 <p>The columns on the right show Boolean operator, these combine 2 or more logical tests into a single one, so you get true or false. The columns on the left actually do logical operations.</p>
 <table>
 <caption>Logical tests in R</caption>
@@ -411,12 +440,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div id="mutate" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Mutate</h2>
+<div id="mutate" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Mutate</h2>
 <p>The mutate function takes your data frame and it returns a copy of the data with, with additional variables that you derive from the variable set that exists in the data. So mutate is there for anything you can derive from the data you already have, and want to make a new column from it.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="tidyverse-tools.html#cb98-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb98-2"><a href="tidyverse-tools.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> pressure <span class="sc">/</span> wind) <span class="sc">%&gt;%</span> </span>
-<span id="cb98-3"><a href="tidyverse-tools.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, pressure, wind, ratio)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tidyverse-tools.html#cb10-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="tidyverse-tools.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> pressure <span class="sc">/</span> wind) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="tidyverse-tools.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, pressure, wind, ratio)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 4
 ##    name  pressure  wind ratio
 ##    &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
@@ -432,9 +461,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Amy       1002    40  25.0
 ## # … with 10,000 more rows</code></pre>
 <p>You can also make multiple columns at the same time, even using columns that are created at the same time, as long as those come before chronologically, i.e.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="tidyverse-tools.html#cb100-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb100-2"><a href="tidyverse-tools.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> pressure <span class="sc">/</span> wind, <span class="at">inverse =</span> ratio<span class="sc">^-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-3"><a href="tidyverse-tools.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, pressure, wind, ratio, inverse)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tidyverse-tools.html#cb12-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="tidyverse-tools.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> pressure <span class="sc">/</span> wind, <span class="at">inverse =</span> ratio<span class="sc">^-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="tidyverse-tools.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, pressure, wind, ratio, inverse)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 5
 ##    name  pressure  wind ratio inverse
 ##    &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
@@ -450,8 +479,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Amy       1002    40  25.0  0.0399
 ## # … with 10,000 more rows</code></pre>
 <p>One thing to note: mutate doesn’t affect the original data frame. It simply returns a new temporary dataframe. If you want to save the columns you need to assign it to a new data frame (or overwrite the original)</p>
-<div id="useful-mutate-functions" class="section level3" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Useful mutate functions:</h3>
+<div id="useful-mutate-functions" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Useful mutate functions:</h3>
 <table>
 <colgroup>
 <col width="61%" />
@@ -508,18 +537,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div id="summarise-summarize" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Summarise / Summarize</h2>
+<div id="summarise-summarize" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Summarise / Summarize</h2>
 <p>Summarize allows us to take a data frame and calculate a summary statistic from it and get back a new data frame that is much smaller.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tidyverse-tools.html#cb102-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb102-2"><a href="tidyverse-tools.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tidyverse-tools.html#cb14-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="tidyverse-tools.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   median variance     n
 ##    &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
 ## 1    999     381. 10010</code></pre>
 <p>Works very similar to mutate.</p>
-<div id="useful-summary-functions" class="section level3" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> Useful summary functions</h3>
+<div id="useful-summary-functions" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Useful summary functions</h3>
 <table>
 <caption>Useful summary functions, top 5 are specific to dplyr</caption>
 <thead>
@@ -573,12 +602,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div id="arrange" class="section level2" number="7.5">
-<h2><span class="header-section-number">7.5</span> Arrange()</h2>
+<div id="arrange" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Arrange()</h2>
 <p>This doesn’t add or subtract from your data, but helps you organize your rows!</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="tidyverse-tools.html#cb104-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb104-2"><a href="tidyverse-tools.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wind)) <span class="sc">%&gt;%</span> </span>
-<span id="cb104-3"><a href="tidyverse-tools.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, wind, pressure, year)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tidyverse-tools.html#cb16-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="tidyverse-tools.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wind)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="tidyverse-tools.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, wind, pressure, year)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 4
 ##    name     wind pressure  year
 ##    &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -594,9 +623,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 David     150      926  1979
 ## # … with 10,000 more rows</code></pre>
 <p>This way, ties are just ordered in the way they originally appeared in the dataframe. Alternatively, you can give a second column to sort by to break those ties, such as by year:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="tidyverse-tools.html#cb106-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb106-2"><a href="tidyverse-tools.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wind), <span class="fu">desc</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb106-3"><a href="tidyverse-tools.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, wind, pressure, year)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="tidyverse-tools.html#cb18-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="tidyverse-tools.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(wind), <span class="fu">desc</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="tidyverse-tools.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, wind, pressure, year)</span></code></pre></div>
 <pre><code>## # A tibble: 10,010 x 4
 ##    name     wind pressure  year
 ##    &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -612,12 +641,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Felix     150      935  2007
 ## # … with 10,000 more rows</code></pre>
 </div>
-<div id="group_by" class="section level2" number="7.6">
-<h2><span class="header-section-number">7.6</span> Group_by()</h2>
+<div id="group_by" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Group_by()</h2>
 <p>A very powerful function to get summary statistics from just certain groups. Say we want to see median wind speed based on year for example:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="tidyverse-tools.html#cb108-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
-<span id="cb108-2"><a href="tidyverse-tools.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb108-3"><a href="tidyverse-tools.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tidyverse-tools.html#cb20-1" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="tidyverse-tools.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="tidyverse-tools.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 41 x 4
 ##     year median variance     n
 ##  * &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
@@ -633,16 +662,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10  1984    998    178.    236
 ## # … with 31 more rows</code></pre>
 <p>We can save that in a in data frame and graph it too!</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="tidyverse-tools.html#cb110-1" aria-hidden="true" tabindex="-1"></a>storms_graph <span class="ot">&lt;-</span> storms <span class="sc">%&gt;%</span> </span>
-<span id="cb110-2"><a href="tidyverse-tools.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb110-3"><a href="tidyverse-tools.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb110-4"><a href="tidyverse-tools.html#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-5"><a href="tidyverse-tools.html#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> storms_graph, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> median)) <span class="sc">+</span> </span>
-<span id="cb110-6"><a href="tidyverse-tools.html#cb110-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb110-7"><a href="tidyverse-tools.html#cb110-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span> </span>
-<span id="cb110-8"><a href="tidyverse-tools.html#cb110-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Median wind speed of storms by year&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tidyverse-tools.html#cb22-1" aria-hidden="true" tabindex="-1"></a>storms_graph <span class="ot">&lt;-</span> storms <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="tidyverse-tools.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="tidyverse-tools.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(pressure), <span class="at">variance =</span> <span class="fu">var</span>(pressure), <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb22-4"><a href="tidyverse-tools.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="tidyverse-tools.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> storms_graph, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> median)) <span class="sc">+</span> </span>
+<span id="cb22-6"><a href="tidyverse-tools.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb22-7"><a href="tidyverse-tools.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span> </span>
+<span id="cb22-8"><a href="tidyverse-tools.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Median wind speed of storms by year&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>You can also group by multiple things, just add a comma!</p>
 
 </div>
@@ -652,8 +681,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="comparing-different-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regresssion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -684,7 +713,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/noahlove/data-mining/edit/master/Tidyverse-Sheet.Rmd",
+"link": "https://github.com/noahlove/data-mining/edit/master/02-Tidyverse-Sheet.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -692,7 +721,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/noahlove/data-mining/blob/master/Tidyverse-Sheet.Rmd",
+"link": "https://github.com/noahlove/data-mining/blob/master/02-Tidyverse-Sheet.Rmd",
 "text": null
 },
 "download": null,
