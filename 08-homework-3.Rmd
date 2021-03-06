@@ -6,9 +6,16 @@ library(tidyverse)
 ```
 
 
-```{r}
+```{r include=FALSE}
 tweets_raw <- read_csv("Datasets/non_retweets_dc_inaug_steal.csv")
 dim(tweets_raw)
 ```
 
+
+```{r}
+#clean code
+tweets <- as_tibble(tweets_raw)
+
+tweets_raw
+```
 
