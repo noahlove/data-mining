@@ -1,12 +1,12 @@
 # Homework 3 Project
 
-```{r packages}
+```{r}
 library(caret)
 library(tidyverse)
 ```
 
 
-```{r import data}
+```{r}
 tweets_raw <- read_csv("Datasets/non_retweets_dc_inaug_steal.csv")
 dim(tweets_raw)
 ```

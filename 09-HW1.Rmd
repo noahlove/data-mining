@@ -7,10 +7,6 @@ output:
   html_document: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## HW1
 
 This homework is to meant for you to brush up some prerequisites. If some of these topics are new to you, feel free to ask on Piazza how to approach these.
