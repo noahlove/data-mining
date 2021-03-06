@@ -16,8 +16,7 @@ Calls were made once a day around midnight and there is a limit on the number of
 can be made freely.
 
 ## Question 0
-What dates do the tweets cover? Please visualize the temporal distribution of the tweets
-with the intent to understand where most Tweets in the dataset came from in time.
+What dates do the tweets cover? Please visualize the temporal distribution of the tweets with the intent to understand where most Tweets in the dataset came from in time.
 
 ## Question 1
 Please combine all the token frequencies that contain the string `inaug` into a single column.
@@ -32,10 +31,9 @@ please model your new column from Question 1 against all other tokens (i.e. excl
 using the following models. This is **time-consuming**! You should use `Sys.time()` to have a realistic expectation of how long each model will take.
 
 Please plot the MSE from a 5-fold cross validation to compare the prediction accuracy between
-- OLS
-  - Please ignore the rank deficient warning, this is a warning of high-collinearity
-    that is common with high dimensional data and why OLS shouldn't do well.
-- stepwise regression using AIC as the objective
+ - OLS
+   - Please ignore the rank deficient warning, this is a warning of high-collinearity that is common with high dimensional data and why OLS shouldn't do well.
+ - stepwise regression using AIC as the objective
 
 
 
@@ -54,8 +52,7 @@ Please plot the MSE from a 5-fold cross validation to compare the prediction acc
 
 - Lasso corresponding to $$\lambda$$=`lambda.min` from cv.glmnet
   - hint: [predict.cv.glmnet](https://www.rdocumentation.org/packages/glmnet/versions/4.1/topics/predict.cv.glmnet)
-  - hint: you may want to convert the training X matrix into sparse matrices, i.e. `Matrix(as.matrix(df_sans_y), sparse=TRUE)`
-    to speed things up. This essentially avoids many multiplications when a 0 is involved.
+  - hint: you may want to convert the training X matrix into sparse matrices, i.e. `Matrix(as.matrix(df_sans_y), sparse=TRUE)` to speed things up. This essentially avoids many multiplications when a 0 is involved.
 - Ridge regression corresponding to $$\lambda$$=`lambda.min` from cv.glmnet
 
 Please **do not** normalize your features for this problem but use the raw frequencies.
@@ -86,6 +83,8 @@ For the algorithm that performed the best, please retrain the model with the fol
   you normalize.
 
 Please plot the distribution of the coefficients.
+
+
 
 ## Question 4
 Please list out the top tokens corresponding to the strongest non-zero coefficients.

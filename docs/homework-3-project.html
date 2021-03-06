@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Homework 3 Project | HW1</title>
-  <meta name="description" content="Chapter 7 Homework 3 Project | HW1" />
+  <title>Chapter 7 Homework 3 Project | Data Mining</title>
+  <meta name="description" content="Chapter 7 Homework 3 Project | Data Mining" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Homework 3 Project | HW1" />
+  <meta property="og:title" content="Chapter 7 Homework 3 Project | Data Mining" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Homework 3 Project | HW1" />
+  <meta name="twitter:title" content="Chapter 7 Homework 3 Project | Data Mining" />
   
   
   
@@ -24,6 +24,7 @@
 <meta name="author" content="Noah Love" />
 
 
+<meta name="date" content="2021-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -237,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HW1</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Mining</a>
           </h1>
         </div>
 
@@ -247,337 +248,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="homework-3-project" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Homework 3 Project</h1>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="homework-3-project.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb311-2"><a href="homework-3-project.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="homework-3-project.html#cb312-1" aria-hidden="true" tabindex="-1"></a>tweets_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Datasets/non_retweets_dc_inaug_steal.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-## ── Column specification ──────────────────────────────────────────────────
-## cols(
-##   .default = col_double(),
-##   `#abddarb` = col_character(),
-##   created_at = col_datetime(format = &quot;&quot;),
-##   tweet_body = col_character()
-## )
-## ℹ Use `spec()` for the full column specifications.</code></pre>
-<pre><code>## Warning: 2 parsing failures.
-## row col    expected      actual                                       file
-##  83  -- 843 columns 781 columns &#39;Datasets/non_retweets_dc_inaug_steal.csv&#39;
-##  84  -- 843 columns 63 columns  &#39;Datasets/non_retweets_dc_inaug_steal.csv&#39;</code></pre>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="homework-3-project.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tweets_raw)</span></code></pre></div>
-<pre><code>## [1] 16005   843</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="homework-3-project.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="homework-3-project.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ tibble  3.0.6     ✓ dplyr   1.0.4
+## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1
+## ✓ purrr   0.3.4</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x purrr::lift()   masks caret::lift()</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="homework-3-project.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clean code</span></span>
+<span id="cb8-2"><a href="homework-3-project.html#cb8-2" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(tweets_raw)</span>
+<span id="cb8-3"><a href="homework-3-project.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="homework-3-project.html#cb8-4" aria-hidden="true" tabindex="-1"></a>tweets_raw</span></code></pre></div>
+<pre><code>## # A tibble: 16,005 x 843
+##    `#abddarb` `#adsb` `#america` `#americafirst` `#american` `#antifa`
+##    &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1 0.0              0          0               0           0         0
+##  2 0.0              0          0               0           0         0
+##  3 0.0              0          0               0           0         0
+##  4 0.0              0          0               0           0         0
+##  5 0.0              0          0               0           0         0
+##  6 0.0              0          0               0           0         0
+##  7 0.0              0          0               0           0         0
+##  8 0.0              0          0               0           0         0
+##  9 0.0              0          0               0           0         0
+## 10 0.0              0          0               0           0         0
+## # … with 15,995 more rows, and 837 more variables: `#atlanta` &lt;dbl&gt;,
+## #   `#aukland` &lt;dbl&gt;, `#australia` &lt;dbl&gt;, `#baltimor` &lt;dbl&gt;, `#biden` &lt;dbl&gt;,
+## #   `#bidencheated2020` &lt;dbl&gt;, `#bidencrimefamilli` &lt;dbl&gt;, `#bidenharri` &lt;dbl&gt;,
+## #   `#bidenharris2020` &lt;dbl&gt;, `#bidenharrisinaugur` &lt;dbl&gt;,
+## #   `#bideninaugur` &lt;dbl&gt;, `#bidenwillneverbepresid` &lt;dbl&gt;,
+## #   `#blacklivesmatt` &lt;dbl&gt;, `#blm` &lt;dbl&gt;, `#boston` &lt;dbl&gt;, `#break` &lt;dbl&gt;,
+## #   `#breakingnew` &lt;dbl&gt;, `#california` &lt;dbl&gt;, `#canada` &lt;dbl&gt;,
+## #   `#capitalhil` &lt;dbl&gt;, `#capitol` &lt;dbl&gt;, `#capitolbuild` &lt;dbl&gt;,
+## #   `#capitolhil` &lt;dbl&gt;, `#capitolriot` &lt;dbl&gt;, `#chicago` &lt;dbl&gt;, `#cnn` &lt;dbl&gt;,
+## #   `#congress` &lt;dbl&gt;, `#constitut` &lt;dbl&gt;, `#coronaviru` &lt;dbl&gt;,
+## #   `#covid19` &lt;dbl&gt;, `#deal` &lt;dbl&gt;, `#democraci` &lt;dbl&gt;, `#democrat` &lt;dbl&gt;,
+## #   `#denver` &lt;dbl&gt;, `#dmv` &lt;dbl&gt;, `#domesticterrorist` &lt;dbl&gt;,
+## #   `#donaldtrump` &lt;dbl&gt;, `#draintheswamp` &lt;dbl&gt;, `#edinburgh` &lt;dbl&gt;,
+## #   `#eeuu` &lt;dbl&gt;, `#election2020` &lt;dbl&gt;, `#electionintegr` &lt;dbl&gt;,
+## #   `#fashion` &lt;dbl&gt;, `#fbi` &lt;dbl&gt;, `#fightback` &lt;dbl&gt;, `#fightfortrump` &lt;dbl&gt;,
+## #   `#florida` &lt;dbl&gt;, `#freedom` &lt;dbl&gt;, `#georgia` &lt;dbl&gt;, `#gop` &lt;dbl&gt;,
+## #   `#govern` &lt;dbl&gt;, `#houston` &lt;dbl&gt;, `#impeach` &lt;dbl&gt;, `#inaugur` &lt;dbl&gt;,
+## #   `#inauguration2021` &lt;dbl&gt;, `#inaugurationday` &lt;dbl&gt;,
+## #   `#inaugurationday2021` &lt;dbl&gt;, `#insurrect` &lt;dbl&gt;, `#jan6` &lt;dbl&gt;,
+## #   `#january6th` &lt;dbl&gt;, `#joebiden` &lt;dbl&gt;, `#kag` &lt;dbl&gt;, `#kamalaharri` &lt;dbl&gt;,
+## #   `#london` &lt;dbl&gt;, `#losangel` &lt;dbl&gt;, `#maga` &lt;dbl&gt;, `#maga2020` &lt;dbl&gt;,
+## #   `#manchest` &lt;dbl&gt;, `#marchfortrump` &lt;dbl&gt;, `#maryland` &lt;dbl&gt;,
+## #   `#miami` &lt;dbl&gt;, `#montreal` &lt;dbl&gt;, `#nationalguard` &lt;dbl&gt;, `#new` &lt;dbl&gt;,
+## #   `#newyork` &lt;dbl&gt;, `#nyc` &lt;dbl&gt;, `#outland` &lt;dbl&gt;, `#patriot` &lt;dbl&gt;,
+## #   `#philadelphia` &lt;dbl&gt;, `#polit` &lt;dbl&gt;, `#potu` &lt;dbl&gt;, `#presid` &lt;dbl&gt;,
+## #   `#presidenttrump` &lt;dbl&gt;, `#protest` &lt;dbl&gt;, `#proudboy` &lt;dbl&gt;,
+## #   `#qanon` &lt;dbl&gt;, `#republican` &lt;dbl&gt;, `#rig` &lt;dbl&gt;, `#riggedelect` &lt;dbl&gt;,
+## #   `#riot` &lt;dbl&gt;, `#sanfrancisco` &lt;dbl&gt;, `#scotland` &lt;dbl&gt;, `#sedit` &lt;dbl&gt;,
+## #   `#senat` &lt;dbl&gt;, `#stopthest` &lt;dbl&gt;, `#stopthesteai` &lt;dbl&gt;,
+## #   `#stopthesteai2020` &lt;dbl&gt;, `#stopthesteai2021` &lt;dbl&gt;, `#sydney` &lt;dbl&gt;,
+## #   `#texa` &lt;dbl&gt;, …</code></pre>
 
 <div id="hw1" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> HW1</h2>
-<p>This homework is to meant for you to brush up some prerequisites. If some of these topics are new to you, feel free to ask on Piazza how to approach these.
-Context - Is gold price inversely related to the market?</p>
-<p>There’s a belief that the money from the stock market will escape to gold when the stock market is not doing well. The demand for gold and the expectations for the market are often reflected in the pricing of the assets, i.e. high demand yields high gold prices and upward expectations also lead to higher stock prices.</p>
 <div id="q1" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Q1</h3>
-<p>Please use the ‘TIME_SERIES_WEEKLY’ API listed on Alpha Vantage to get the weekly time series data for</p>
-<pre><code>‘VOO’: an arbitrarily chosen ETF that tracks the market
-‘GDXJ’: an arbitrarily chosen ETF for gold</code></pre>
-<p>For this problem, simply show the code for your query and print out the number of weeks of data for each time series. Your API key should NOT appear in your solutions but the URL you’re using and the query should be shown.</p>
-<p>Hint:</p>
-<pre><code>You will need to claim a free API key before you can query data
-The functions in httr should be helpful, here is some sample code if you have not done so before.</code></pre>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="homework-3-project.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(httr)</span></span>
-<span id="cb319-2"><a href="homework-3-project.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="co"># url_VOO &lt;- &quot;https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&amp;symbol=VOO&amp;apikey=SEDREZCZEW7NAOQK&quot;</span></span>
-<span id="cb319-3"><a href="homework-3-project.html#cb319-3" aria-hidden="true" tabindex="-1"></a><span class="co"># url_GDXJ &lt;- &quot;https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&amp;symbol=GDXJ&amp;apikey=SEDREZCZEW7NAOQK&quot;</span></span>
-<span id="cb319-4"><a href="homework-3-project.html#cb319-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb319-5"><a href="homework-3-project.html#cb319-5" aria-hidden="true" tabindex="-1"></a><span class="co"># responce &lt;- GET(url = url_VOO, query = params)</span></span>
-<span id="cb319-6"><a href="homework-3-project.html#cb319-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb319-7"><a href="homework-3-project.html#cb319-7" aria-hidden="true" tabindex="-1"></a>function_name <span class="ot">&lt;-</span> <span class="st">&quot;TIME_SERIES_WEEKLY&quot;</span></span>
-<span id="cb319-8"><a href="homework-3-project.html#cb319-8" aria-hidden="true" tabindex="-1"></a>stock_ticker <span class="ot">&lt;-</span> <span class="st">&quot;VOO&quot;</span></span>
-<span id="cb319-9"><a href="homework-3-project.html#cb319-9" aria-hidden="true" tabindex="-1"></a>my_data_type <span class="ot">&lt;-</span><span class="st">&quot;csv&quot;</span></span>
-<span id="cb319-10"><a href="homework-3-project.html#cb319-10" aria-hidden="true" tabindex="-1"></a>output_size <span class="ot">&lt;-</span> <span class="st">&quot;full&quot;</span></span>
-<span id="cb319-11"><a href="homework-3-project.html#cb319-11" aria-hidden="true" tabindex="-1"></a>api_call <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.alphavantage.co/query?function=&quot;</span>,</span>
-<span id="cb319-12"><a href="homework-3-project.html#cb319-12" aria-hidden="true" tabindex="-1"></a>                   function_name,</span>
-<span id="cb319-13"><a href="homework-3-project.html#cb319-13" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;symbol=&quot;</span>,</span>
-<span id="cb319-14"><a href="homework-3-project.html#cb319-14" aria-hidden="true" tabindex="-1"></a>                   stock_ticker,</span>
-<span id="cb319-15"><a href="homework-3-project.html#cb319-15" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;outputsize=&quot;</span>,</span>
-<span id="cb319-16"><a href="homework-3-project.html#cb319-16" aria-hidden="true" tabindex="-1"></a>                   output_size,</span>
-<span id="cb319-17"><a href="homework-3-project.html#cb319-17" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;apikey=&quot;</span>,</span>
-<span id="cb319-18"><a href="homework-3-project.html#cb319-18" aria-hidden="true" tabindex="-1"></a>                   api_key,</span>
-<span id="cb319-19"><a href="homework-3-project.html#cb319-19" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;datatype=&quot;</span>,</span>
-<span id="cb319-20"><a href="homework-3-project.html#cb319-20" aria-hidden="true" tabindex="-1"></a>                   my_data_type)</span>
-<span id="cb319-21"><a href="homework-3-project.html#cb319-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb319-22"><a href="homework-3-project.html#cb319-22" aria-hidden="true" tabindex="-1"></a>VOO <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(api_call))</span>
-<span id="cb319-23"><a href="homework-3-project.html#cb319-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb319-24"><a href="homework-3-project.html#cb319-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(VOO)</span></code></pre></div>
-<pre><code>##    timestamp   open     high     low  close   volume
-## 1 2021-03-05 354.55 359.3900 341.915 352.69 30781752
-## 2 2021-02-26 355.84 360.5800 347.710 349.59 26216064
-## 3 2021-02-19 362.15 362.3700 356.490 358.59 13120646
-## 4 2021-02-12 357.92 361.1900 356.300 361.05 12023707
-## 5 2021-02-05 343.63 357.1312 341.400 356.44 13716229
-## 6 2021-01-29 352.71 354.6450 338.570 340.18 20225448</code></pre>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="homework-3-project.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For VOO</span></span>
-<span id="cb321-2"><a href="homework-3-project.html#cb321-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-3"><a href="homework-3-project.html#cb321-3" aria-hidden="true" tabindex="-1"></a>function_name <span class="ot">&lt;-</span> <span class="st">&quot;TIME_SERIES_WEEKLY&quot;</span></span>
-<span id="cb321-4"><a href="homework-3-project.html#cb321-4" aria-hidden="true" tabindex="-1"></a>stock_ticker <span class="ot">&lt;-</span> <span class="st">&quot;GDXJ&quot;</span></span>
-<span id="cb321-5"><a href="homework-3-project.html#cb321-5" aria-hidden="true" tabindex="-1"></a>my_data_type <span class="ot">&lt;-</span><span class="st">&quot;csv&quot;</span></span>
-<span id="cb321-6"><a href="homework-3-project.html#cb321-6" aria-hidden="true" tabindex="-1"></a>output_size <span class="ot">&lt;-</span> <span class="st">&quot;full&quot;</span></span>
-<span id="cb321-7"><a href="homework-3-project.html#cb321-7" aria-hidden="true" tabindex="-1"></a>api_call <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.alphavantage.co/query?function=&quot;</span>,</span>
-<span id="cb321-8"><a href="homework-3-project.html#cb321-8" aria-hidden="true" tabindex="-1"></a>                   function_name,</span>
-<span id="cb321-9"><a href="homework-3-project.html#cb321-9" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;symbol=&quot;</span>,</span>
-<span id="cb321-10"><a href="homework-3-project.html#cb321-10" aria-hidden="true" tabindex="-1"></a>                   stock_ticker,</span>
-<span id="cb321-11"><a href="homework-3-project.html#cb321-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;outputsize=&quot;</span>,</span>
-<span id="cb321-12"><a href="homework-3-project.html#cb321-12" aria-hidden="true" tabindex="-1"></a>                   output_size,</span>
-<span id="cb321-13"><a href="homework-3-project.html#cb321-13" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;apikey=&quot;</span>,</span>
-<span id="cb321-14"><a href="homework-3-project.html#cb321-14" aria-hidden="true" tabindex="-1"></a>                   api_key,</span>
-<span id="cb321-15"><a href="homework-3-project.html#cb321-15" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;&amp;datatype=&quot;</span>,</span>
-<span id="cb321-16"><a href="homework-3-project.html#cb321-16" aria-hidden="true" tabindex="-1"></a>                   my_data_type)</span>
-<span id="cb321-17"><a href="homework-3-project.html#cb321-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-18"><a href="homework-3-project.html#cb321-18" aria-hidden="true" tabindex="-1"></a>GDXJ <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(api_call))</span>
-<span id="cb321-19"><a href="homework-3-project.html#cb321-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-20"><a href="homework-3-project.html#cb321-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(GDXJ)</span></code></pre></div>
-<pre><code>##    timestamp  open    high    low close   volume
-## 1 2021-03-05 46.54 46.8700 44.000 45.61 40024061
-## 2 2021-02-26 48.29 50.6500 45.065 45.76 48304711
-## 3 2021-02-19 49.15 50.3782 47.040 47.54 24748594
-## 4 2021-02-12 51.30 51.6700 49.250 50.25 26097487
-## 5 2021-02-05 53.21 54.3200 48.280 50.37 39557597
-## 6 2021-01-29 50.65 52.3100 47.590 50.08 36177470</code></pre>
 </div>
 <div id="q2" class="section level3" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> Q2</h3>
-<p>Please plot the close price for VOO against the different weeks and overlay the regression line for this scatter plot.</p>
-<p>You do not need to label your week index but the prices should be labeled.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="homework-3-project.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb323-2"><a href="homework-3-project.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb323-3"><a href="homework-3-project.html#cb323-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-4"><a href="homework-3-project.html#cb323-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-5"><a href="homework-3-project.html#cb323-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-6"><a href="homework-3-project.html#cb323-6" aria-hidden="true" tabindex="-1"></a>VOO<span class="sc">$</span>timestamp <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(VOO<span class="sc">$</span>timestamp)</span>
-<span id="cb323-7"><a href="homework-3-project.html#cb323-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb323-8"><a href="homework-3-project.html#cb323-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(VOO, <span class="fu">aes</span>(<span class="at">x =</span> timestamp,<span class="at">y =</span> close)) <span class="sc">+</span> </span>
-<span id="cb323-9"><a href="homework-3-project.html#cb323-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb323-10"><a href="homework-3-project.html#cb323-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;day&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb323-11"><a href="homework-3-project.html#cb323-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;price&quot;</span>) <span class="sc">+</span></span>
-<span id="cb323-12"><a href="homework-3-project.html#cb323-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y<span class="sc">~</span>x)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 </div>
 <div id="q3" class="section level3" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> Q3</h3>
-<p>Please plot the residuals from the regression in Q2 against the close price of GDXJ.</p>
-<p>label your axes with units.
-Your title should include the correlation value, rounded to the nearest hundredth.
-Please show the code that demonstrates your decision on merging the 2 time series.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="homework-3-project.html#cb324-1" aria-hidden="true" tabindex="-1"></a>linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(VOO<span class="sc">$</span>close <span class="sc">~</span> VOO<span class="sc">$</span>timestamp)</span>
-<span id="cb324-2"><a href="homework-3-project.html#cb324-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-3"><a href="homework-3-project.html#cb324-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-4"><a href="homework-3-project.html#cb324-4" aria-hidden="true" tabindex="-1"></a>subset_GDXJ <span class="ot">&lt;-</span> GDXJ[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(linear<span class="sc">$</span>residuals),]</span>
-<span id="cb324-5"><a href="homework-3-project.html#cb324-5" aria-hidden="true" tabindex="-1"></a><span class="co">#subset_GDXJ</span></span>
-<span id="cb324-6"><a href="homework-3-project.html#cb324-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-7"><a href="homework-3-project.html#cb324-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-8"><a href="homework-3-project.html#cb324-8" aria-hidden="true" tabindex="-1"></a>gold_vs_stock <span class="ot">&lt;-</span> <span class="fu">lm</span>(subset_GDXJ<span class="sc">$</span>close <span class="sc">~</span> linear<span class="sc">$</span>residuals)</span>
-<span id="cb324-9"><a href="homework-3-project.html#cb324-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gold_vs_stock)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = subset_GDXJ$close ~ linear$residuals)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -20.0033  -6.6721  -0.3523   5.3648  28.1189 
-## 
-## Coefficients:
-##                  Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      33.12556    0.40671   81.45  &lt; 2e-16 ***
-## linear$residuals  0.09952    0.01813    5.49 6.16e-08 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 9.512 on 545 degrees of freedom
-## Multiple R-squared:  0.05241,    Adjusted R-squared:  0.05067 
-## F-statistic: 30.14 on 1 and 545 DF,  p-value: 6.162e-08</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="homework-3-project.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> linear<span class="sc">$</span>residuals, <span class="at">y =</span> subset_GDXJ<span class="sc">$</span>close,</span>
-<span id="cb326-2"><a href="homework-3-project.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;Difference in stock market performance to linear&quot;</span>,</span>
-<span id="cb326-3"><a href="homework-3-project.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Closing price of GDXJ&quot;</span>,</span>
-<span id="cb326-4"><a href="homework-3-project.html#cb326-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Correlation coeff: 0.049&quot;</span>,</span>
-<span id="cb326-5"><a href="homework-3-project.html#cb326-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="fu">lm</span>(subset_GDXJ<span class="sc">$</span>close <span class="sc">~</span> linear<span class="sc">$</span>residuals)))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 </div>
 <div id="q4" class="section level3" number="7.1.4">
 <h3><span class="header-section-number">7.1.4</span> Q4</h3>
-<p>Relying only on the scatter plot, would you say the belief between gold and the market is supported or rejected? Please explain.</p>
-<p>Relying on the scatter plot and the line I plotted, gold is not inversely related. In fact, when the market it beating its performace, on average gold is closing higher as well. Also, when the stock market is doing really poorly (compared to the linear regression) gold also closes really low as seen by the strong tail around -40.</p>
 
 </div>
 </div>
 <div id="r-markdown" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> R Markdown</h2>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="homework-3-project.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;jsonlite&#39;</span>)</span>
-<span id="cb327-2"><a href="homework-3-project.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;RJSONIO&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="homework-3-project.html#cb328-1" aria-hidden="true" tabindex="-1"></a>votes <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&#39;Datasets/votes.json&#39;</span>)</span>
-<span id="cb328-2"><a href="homework-3-project.html#cb328-2" aria-hidden="true" tabindex="-1"></a>senator_id <span class="ot">&lt;-</span></span>
-<span id="cb328-3"><a href="homework-3-project.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="fu">names</span>(votes))</span>
-<span id="cb328-4"><a href="homework-3-project.html#cb328-4" aria-hidden="true" tabindex="-1"></a>session_id <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">names</span>(<span class="fu">unlist</span>(<span class="fu">unname</span>(</span>
-<span id="cb328-5"><a href="homework-3-project.html#cb328-5" aria-hidden="true" tabindex="-1"></a>  votes</span>
-<span id="cb328-6"><a href="homework-3-project.html#cb328-6" aria-hidden="true" tabindex="-1"></a>)))))</span>
-<span id="cb328-7"><a href="homework-3-project.html#cb328-7" aria-hidden="true" tabindex="-1"></a>voting_matrix <span class="ot">&lt;-</span></span>
-<span id="cb328-8"><a href="homework-3-project.html#cb328-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">length</span>(session_id), <span class="at">ncol =</span> <span class="fu">length</span>(senator_id))</span>
-<span id="cb328-9"><a href="homework-3-project.html#cb328-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(voting_matrix) <span class="ot">&lt;-</span>  session_id</span>
-<span id="cb328-10"><a href="homework-3-project.html#cb328-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(voting_matrix) <span class="ot">&lt;-</span>  senator_id</span>
-<span id="cb328-11"><a href="homework-3-project.html#cb328-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb328-12"><a href="homework-3-project.html#cb328-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Making the matrix</span></span>
-<span id="cb328-13"><a href="homework-3-project.html#cb328-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb328-14"><a href="homework-3-project.html#cb328-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> senator_id) {</span>
-<span id="cb328-15"><a href="homework-3-project.html#cb328-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> session_id) {</span>
-<span id="cb328-16"><a href="homework-3-project.html#cb328-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (j <span class="sc">%in%</span> <span class="fu">names</span>(votes[[i]])) {</span>
-<span id="cb328-17"><a href="homework-3-project.html#cb328-17" aria-hidden="true" tabindex="-1"></a>      voting_matrix[j, i] <span class="ot">&lt;-</span> votes[[i]][[j]]</span>
-<span id="cb328-18"><a href="homework-3-project.html#cb328-18" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb328-19"><a href="homework-3-project.html#cb328-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb328-20"><a href="homework-3-project.html#cb328-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb328-21"><a href="homework-3-project.html#cb328-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb328-22"><a href="homework-3-project.html#cb328-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimensions</span></span>
-<span id="cb328-23"><a href="homework-3-project.html#cb328-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(</span>
-<span id="cb328-24"><a href="homework-3-project.html#cb328-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Number of rows = &quot;</span>,</span>
-<span id="cb328-25"><a href="homework-3-project.html#cb328-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>(<span class="fu">nrow</span>(voting_matrix)),</span>
-<span id="cb328-26"><a href="homework-3-project.html#cb328-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;, number of columns = &quot;</span>,</span>
-<span id="cb328-27"><a href="homework-3-project.html#cb328-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>(<span class="fu">ncol</span>(voting_matrix))</span>
-<span id="cb328-28"><a href="homework-3-project.html#cb328-28" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
-<pre><code>## [1] &quot;Number of rows =  803 , number of columns =  231&quot;</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="homework-3-project.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Percentage of matrix that does not contain -1, 1 or 0</span></span>
-<span id="cb330-2"><a href="homework-3-project.html#cb330-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb330-3"><a href="homework-3-project.html#cb330-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="fu">as.character</span>((</span>
-<span id="cb330-4"><a href="homework-3-project.html#cb330-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">is.na</span>(voting_matrix)) <span class="sc">+</span> <span class="fu">sum</span>(voting_matrix <span class="sc">==</span> <span class="sc">-</span><span class="dv">9999</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb330-5"><a href="homework-3-project.html#cb330-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">/</span> (</span>
-<span id="cb330-6"><a href="homework-3-project.html#cb330-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(voting_matrix) <span class="sc">*</span> <span class="fu">ncol</span>(voting_matrix)</span>
-<span id="cb330-7"><a href="homework-3-project.html#cb330-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">*</span> <span class="dv">100</span>), <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
-<pre><code>## [1] &quot;56.737451008933 %&quot;</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="homework-3-project.html#cb332-1" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(voting_matrix, <span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in cor(voting_matrix, use = &quot;pairwise.complete.obs&quot;): the standard
-## deviation is zero</code></pre>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="homework-3-project.html#cb334-1" aria-hidden="true" tabindex="-1"></a>lower_cor <span class="ot">&lt;-</span> cor_matrix[<span class="fu">lower.tri</span>(cor_matrix)]</span></code></pre></div>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="homework-3-project.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(lower_cor, <span class="at">main =</span> <span class="st">&quot;Histogram of Correlation Values&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Correlation&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="homework-3-project.html#cb336-1" aria-hidden="true" tabindex="-1"></a>left <span class="ot">&lt;-</span> lower_cor[lower_cor <span class="sc">&lt;</span> <span class="fl">0.25</span>]</span>
-<span id="cb336-2"><a href="homework-3-project.html#cb336-2" aria-hidden="true" tabindex="-1"></a>right <span class="ot">&lt;-</span> lower_cor[lower_cor <span class="sc">&gt;=</span> <span class="fl">0.25</span>]</span>
-<span id="cb336-3"><a href="homework-3-project.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(left, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##           0%          25%          50%          75%         100% 
-## -1.000000000 -0.193671052 -0.086741418 -0.002155501  0.249932462</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="homework-3-project.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(right, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##        0%       25%       50%       75%      100% 
-## 0.2501651 0.4675799 0.5855325 0.6795527 1.0000000</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="homework-3-project.html#cb340-1" aria-hidden="true" tabindex="-1"></a>cor_with_mitch <span class="ot">&lt;-</span> cor_matrix[<span class="st">&quot;S174&quot;</span>, ]</span>
-<span id="cb340-2"><a href="homework-3-project.html#cb340-2" aria-hidden="true" tabindex="-1"></a>not_NA <span class="ot">&lt;-</span> <span class="fu">names</span>(cor_with_mitch[<span class="sc">!</span><span class="fu">is.na</span>(cor_with_mitch)])</span>
-<span id="cb340-3"><a href="homework-3-project.html#cb340-3" aria-hidden="true" tabindex="-1"></a>mitch_cor_mat <span class="ot">&lt;-</span> cor_matrix[ , not_NA]</span>
-<span id="cb340-4"><a href="homework-3-project.html#cb340-4" aria-hidden="true" tabindex="-1"></a>mitch_order <span class="ot">&lt;-</span> <span class="fu">rev</span>(<span class="fu">names</span>(<span class="fu">sort</span>(mitch_cor_mat[<span class="st">&quot;S174&quot;</span>, ])))</span>
-<span id="cb340-5"><a href="homework-3-project.html#cb340-5" aria-hidden="true" tabindex="-1"></a>mitch_cor_mat <span class="ot">&lt;-</span> mitch_cor_mat[ mitch_order , mitch_order]<span class="co"># Visualize</span></span>
-<span id="cb340-6"><a href="homework-3-project.html#cb340-6" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(mitch_cor_mat)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="homework-3-project.html#cb341-1" aria-hidden="true" tabindex="-1"></a>voters <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;Datasets/voters.json&quot;</span>)</span>
-<span id="cb341-2"><a href="homework-3-project.html#cb341-2" aria-hidden="true" tabindex="-1"></a>cor_with_mitch <span class="ot">&lt;-</span> mitch_cor_mat[<span class="dv">1</span>, ]</span>
-<span id="cb341-3"><a href="homework-3-project.html#cb341-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-4"><a href="homework-3-project.html#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining Those with Negative Correlation with Mitch</span></span>
-<span id="cb341-5"><a href="homework-3-project.html#cb341-5" aria-hidden="true" tabindex="-1"></a>neg_cor_with_mitch <span class="ot">&lt;-</span> <span class="fu">names</span>(cor_with_mitch[cor_with_mitch <span class="sc">&lt;</span> <span class="dv">0</span>])</span>
-<span id="cb341-6"><a href="homework-3-project.html#cb341-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-7"><a href="homework-3-project.html#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining Possible Republicans</span></span>
-<span id="cb341-8"><a href="homework-3-project.html#cb341-8" aria-hidden="true" tabindex="-1"></a>poss_republican <span class="ot">&lt;-</span></span>
-<span id="cb341-9"><a href="homework-3-project.html#cb341-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(cor_with_mitch[cor_with_mitch <span class="sc">&gt;=</span> <span class="fl">0.2</span> <span class="sc">&amp;</span></span>
-<span id="cb341-10"><a href="homework-3-project.html#cb341-10" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">names</span>(cor_with_mitch) <span class="sc">!=</span> <span class="st">&quot;S174&quot;</span>])</span>
-<span id="cb341-11"><a href="homework-3-project.html#cb341-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-12"><a href="homework-3-project.html#cb341-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding Those with avg greater than 0.2 correlation with poss_repubicans</span></span>
-<span id="cb341-13"><a href="homework-3-project.html#cb341-13" aria-hidden="true" tabindex="-1"></a>subset_mat <span class="ot">&lt;-</span> mitch_cor_mat[neg_cor_with_mitch, poss_republican]</span>
-<span id="cb341-14"><a href="homework-3-project.html#cb341-14" aria-hidden="true" tabindex="-1"></a>averages <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(subset_mat, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb341-15"><a href="homework-3-project.html#cb341-15" aria-hidden="true" tabindex="-1"></a>senators_criteria <span class="ot">&lt;-</span> <span class="fu">names</span>(averages[averages <span class="sc">&gt;</span> <span class="fl">0.2</span>])</span>
-<span id="cb341-16"><a href="homework-3-project.html#cb341-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-17"><a href="homework-3-project.html#cb341-17" aria-hidden="true" tabindex="-1"></a>senator_info <span class="ot">&lt;-</span> voters[senators_criteria]</span>
-<span id="cb341-18"><a href="homework-3-project.html#cb341-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-19"><a href="homework-3-project.html#cb341-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(senator_info)</span></code></pre></div>
-<pre><code>## $S374
-## first_name  last_name      party      state 
-##      &quot;Tom&quot;   &quot;Cotton&quot;        &quot;R&quot;       &quot;AR&quot; 
-## 
-## $S118
-## first_name  last_name      party      state 
-##    &quot;Orrin&quot;    &quot;Hatch&quot;        &quot;R&quot;       &quot;UT&quot; 
-## 
-## $S300
-## first_name  last_name      party      state 
-##  &quot;Richard&quot;     &quot;Burr&quot;        &quot;R&quot;       &quot;NC&quot; 
-## 
-## $S382
-## first_name  last_name      party      state 
-##      &quot;Ben&quot;    &quot;Sasse&quot;        &quot;R&quot;       &quot;NE&quot; 
-## 
-## $S383
-## first_name  last_name      party      state 
-##      &quot;Dan&quot; &quot;Sullivan&quot;        &quot;R&quot;       &quot;AK&quot;</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="homework-3-project.html#cb343-1" aria-hidden="true" tabindex="-1"></a>lisa_id <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which</span>(<span class="fu">unlist</span>(voters) <span class="sc">==</span> <span class="st">&quot;Murkowski&quot;</span>))</span>
-<span id="cb343-2"><a href="homework-3-project.html#cb343-2" aria-hidden="true" tabindex="-1"></a>lisa_id <span class="ot">&lt;-</span> <span class="st">&quot;S157&quot;</span></span>
-<span id="cb343-3"><a href="homework-3-project.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-4"><a href="homework-3-project.html#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-5"><a href="homework-3-project.html#cb343-5" aria-hidden="true" tabindex="-1"></a>cor_with_lisa <span class="ot">&lt;-</span> cor_matrix[lisa_id, ]</span>
-<span id="cb343-6"><a href="homework-3-project.html#cb343-6" aria-hidden="true" tabindex="-1"></a>cor_max <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.max</span>(cor_with_lisa[<span class="fu">names</span>(cor_with_lisa) <span class="sc">!=</span> lisa_id]))</span>
-<span id="cb343-7"><a href="homework-3-project.html#cb343-7" aria-hidden="true" tabindex="-1"></a>cor_min <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.min</span>(cor_with_lisa))</span>
-<span id="cb343-8"><a href="homework-3-project.html#cb343-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-9"><a href="homework-3-project.html#cb343-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-10"><a href="homework-3-project.html#cb343-10" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(voting_matrix[ , lisa_id] <span class="sc">~</span> voting_matrix[ , cor_max] <span class="sc">+</span> voting_matrix[ , cor_min])</span>
-<span id="cb343-11"><a href="homework-3-project.html#cb343-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-12"><a href="homework-3-project.html#cb343-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = voting_matrix[, lisa_id] ~ voting_matrix[, cor_max] + 
-##     voting_matrix[, cor_min])
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.22610 -0.00646  0.06774  0.06774  1.48007 
-## 
-## Coefficients:
-##                          Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)               0.26319    0.04690   5.612 8.27e-08 ***
-## voting_matrix[, cor_max]  0.70617    0.04556  15.500  &lt; 2e-16 ***
-## voting_matrix[, cor_min] -0.03710    0.03523  -1.053    0.294    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.4139 on 165 degrees of freedom
-##   (635 observations deleted due to missingness)
-## Multiple R-squared:  0.6113, Adjusted R-squared:  0.6065 
-## F-statistic: 129.7 on 2 and 165 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="homework-3-project.html#cb345-1" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(voting_matrix[ , lisa_id] <span class="sc">~</span> voting_matrix[ , cor_max])</span>
-<span id="cb345-2"><a href="homework-3-project.html#cb345-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-3"><a href="homework-3-project.html#cb345-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> voting_matrix[ , lisa_id] <span class="sc">-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, voting_matrix[ , cor_max]) <span class="sc">%*%</span> ols<span class="sc">$</span>coefficients</span>
-<span id="cb345-4"><a href="homework-3-project.html#cb345-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-5"><a href="homework-3-project.html#cb345-5" aria-hidden="true" tabindex="-1"></a>cor_with_res <span class="ot">&lt;-</span><span class="cf">function</span>(x){<span class="fu">return</span>(<span class="fu">cor</span>(voting_matrix[ , x], res, <span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>))}</span>
-<span id="cb345-6"><a href="homework-3-project.html#cb345-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-7"><a href="homework-3-project.html#cb345-7" aria-hidden="true" tabindex="-1"></a>senator_id_nolisa <span class="ot">&lt;-</span> senator_id[senator_id <span class="sc">!=</span> lisa_id]</span>
-<span id="cb345-8"><a href="homework-3-project.html#cb345-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-9"><a href="homework-3-project.html#cb345-9" aria-hidden="true" tabindex="-1"></a>all_cor_with_res <span class="ot">&lt;-</span> <span class="fu">sapply</span>(senator_id_nolisa, cor_with_res)</span></code></pre></div>
-<pre><code>## Warning in cor(voting_matrix[, x], res, use = &quot;pairwise.complete.obs&quot;):
-## the standard deviation is zero</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="homework-3-project.html#cb347-1" aria-hidden="true" tabindex="-1"></a>max_cor_with_res <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.max</span>(all_cor_with_res))</span>
-<span id="cb347-2"><a href="homework-3-project.html#cb347-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-3"><a href="homework-3-project.html#cb347-3" aria-hidden="true" tabindex="-1"></a>ols2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(voting_matrix[ , lisa_id] <span class="sc">~</span> voting_matrix[ , cor_max] <span class="sc">+</span> voting_matrix[ , max_cor_with_res])</span>
-<span id="cb347-4"><a href="homework-3-project.html#cb347-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-5"><a href="homework-3-project.html#cb347-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols2)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = voting_matrix[, lisa_id] ~ voting_matrix[, cor_max] + 
-##     voting_matrix[, max_cor_with_res])
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.19242  0.05088  0.05088  0.05088  0.91741 
-## 
-## Coefficients:
-##                                   Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                        0.01585    0.04289   0.370    0.712
-## voting_matrix[, cor_max]           0.37835    0.05110   7.404 6.06e-12
-## voting_matrix[, max_cor_with_res]  0.55491    0.05926   9.364  &lt; 2e-16
-##                                      
-## (Intercept)                          
-## voting_matrix[, cor_max]          ***
-## voting_matrix[, max_cor_with_res] ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.3441 on 168 degrees of freedom
-##   (632 observations deleted due to missingness)
-## Multiple R-squared:  0.7304, Adjusted R-squared:  0.7272 
-## F-statistic: 227.6 on 2 and 168 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 </div>
 </div>
@@ -637,20 +387,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

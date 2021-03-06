@@ -49,29 +49,18 @@ y_ind <- grep("X.stopthesteai2020", names(df))
 x <- as.matrix(df[, -y_ind])
 x <- scale(x)
 y <- as.numeric(df[, y_ind])
-#bad_data <- which(is.na(x[, colnames(x) == "xinaugur"]))
 bad_data <- which(is.na(x[, colnames(x) == "zone"]))
 x <- x[-bad_data,]
 y <- y[-bad_data]
 
+#bad_data2 <- which(is.na(x[, colnames(x) == "zone"]))
+
 ```
 
-```{r}
-
-table(sapply(df,class))
-
-names(df)[sapply(df,class) == "character"]
-
-sum(apply(x,2, function(x) mean(is.na(x) > 0)))
-```
 
 Examine the data
 
 ```{r}
-head(x[,colnames(x)=="zone"])
-
-tail(x[,colnames(x)=="zone"])
-
 head(y)
 ```
 
@@ -86,7 +75,6 @@ ols_coeffs <- summary(ols)$coefficients
 To do data mining with p-values, do not treat them like probabilities, but you can use them as a metric to guide you.
 
 ```{r}
-
 length(ols$coefficients)
 ```
 
@@ -187,9 +175,9 @@ abline(a=0, b=1)
 ## Demo on glmnet functionalities
 
 ```{r}
-library(glmnet)
 lasso_cv <- cv.glmnet(cbind(x, y), y, alpha=1)
 coef(lasso_cv)
+
 lasso_mod <- glmnet(x, y, alpha=1, lambda=lasso_cv$lambda.1se)
 coef(lasso_mod)
 ```
@@ -437,6 +425,7 @@ mean((df_w$y[-train] - pca_pred)^2)
 
 ```{r}
 k <- 3
+
 plot(pr_out$rotation[,k])
 abline(h = 0)
 which(abs(pr_out$rotation[, k]) > 0.2)
