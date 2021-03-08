@@ -1,12 +1,20 @@
 # Homework 3 Project
 
-```{r}
+```{r include=FALSE}
 library(MASS)
+
+library(parallel)
+library(doParallel)
+
+cluster <- makeCluster(detectCores() - 1) # convention to leave 1 core for OS
+registerDoParallel(cluster)
+
 library(caret)
 
 library(broom)
 library(caret)
 library(tidyverse)
+library(factoextra)
 ```
 
 
@@ -28,31 +36,15 @@ ggplot(data = tweets, mapping = aes(x = created_at))+
 
 min(tweets$created_at)
 max(tweets$created_at)
+
+
 ```
 
 ## Question 1
 
 
-```{r eval=FALSE, include=FALSE}
-# Mini sample
-
-# no longer works with no daaframe
-sample_df <- tweets %>% 
-  select(trump, elect, inaugur, `hasinauguration2021`, `#inaugurationday`)
-
-sample_df
-
-tweets_condensed <- sample_df %>% 
-  mutate(total = rowSums(select(., contains('inaug')))) %>% 
-  select(-contains('inaug')) %>% 
-  rename(inaug = total)
-
-tweets_condensed
-```
 
 ```{r}
-text <- df[, grep("tweet_body", names(tweets))]
-
 df <- tweets %>% 
   dplyr::mutate(total = rowSums(dplyr::select(., contains('inaug')))) %>% 
   dplyr::select(-contains('inaug')) %>% 
@@ -62,6 +54,16 @@ df <- tweets %>%
 mean(df$inaug)
 ```
 This condensed seven columns and showed that 46.2% of the dataset's tweets contain the string "inaug."
+
+```{r}
+df$HASHTAG_stopthesteai
+
+tweets_mini <- df %>% 
+  dplyr::select(trump, inaug, `2021`, biden, steal, `2020`, HASHTAG_stopthest, HASHTAG_stopthesteai, HASHTAG_stopthesteai2020, HASHTAG_stopthesteai2021) %>% 
+  top_n(n = 50)
+
+tweets_mini
+```
 
 
 ## Question 2
@@ -75,29 +77,57 @@ summary(ols)
 ```
 
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, cache = TRUE}
 train_control <- trainControl(method  = "cv", number = 5)
 grid <- expand.grid(.fL = c(0), .usekernel = c(FALSE))
 
-model_ols <- train(inaug ~ .,
+system.time(model_ols <- train(inaug ~ .,
                      data = df,
                      method = "lm",           # method
                      na.action = na.pass,     # pass missing
-                     trControl = train_control)        # cross validation
-
-model_caret
+                     trControl = train_control))        # cross validation
 
 ```
-
-```{r}
-model_stepwise <- train(inaug ~ .,
-                        data = df,
-                        method = "glmStepAIC", 
-                        trControl = train_control)
-```
-
 
 Stepwise regression using AIC as the objective
+
+
+```{r, cache = TRUE}
+model_stepwise_mini <- train(inaug ~ .,
+                        data = tweets_mini,
+                        method = "glmStepAIC",
+                        trControl = train_control)
+
+model_stepwise_mini
+```
+
+
+
+```{r, cache=TRUE}
+model_stepwise <- train(inaug ~ .,
+                        data = df,
+                        method = "glmStepAIC",
+                        trControl = train_control)
+
+model_stepwise
+```
+## 4) List out the top tokens corresponding to the strongest non-zero coefficients.
+
+
+
+## 5) Function for Ridge regression
+
+```{r}
+
+```
+
+
+### PCA on token
+
+```{r}
+pr_out <- prcomp(tweets, scale=FALSE)
+
+```
 
 
 
